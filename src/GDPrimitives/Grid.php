@@ -2,28 +2,38 @@
 
 namespace App\GDPrimitives;
 
+use App\Lib\ConfigTrait;
+
 class Grid
 {
 
-    /**
-     * @var Point
-     */
-    private $pt1;
-    /**
-     * @var Point
-     */
-    private $pt2;
-    /**
-     * @var int|mixed
-     */
-    private $tile;
+    use ConfigTrait;
 
+    protected $defaultConfig = [
+        'grid_color' => null,
+    ];
 
-    public function __construct(Point $pt1, Point $pt2, $tile = 70)
+    /**
+     * @var array
+     */
+    protected $config;
+
+    /**
+     * @var Region
+     */
+    protected $region;
+
+    public function __construct(Region $region, $config = [])
     {
-        $this->pt1 = $pt1;
-        $this->pt2 = $pt2;
-        $this->tile = $tile;
+        $this->region = $region;
+        $this->config = array_merge($this->defaultConfig, $config);
+        $this->setConfig(
+            'grid_color',
+            $this->getConfig(
+                'grid_color',
+                (new Color())->grey(50)
+            )
+        );
     }
 
     public function xLine($x)
