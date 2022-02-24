@@ -1,3 +1,6 @@
 /vendor
 /.idea
 /config/app_local.php
+/.editorconfig
+/.gitattributes
+/.github
