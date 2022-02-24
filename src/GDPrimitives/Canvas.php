@@ -8,40 +8,23 @@ class Canvas
 {
 
     protected $defaultConfig = [
-        'width' => 50,
-        'height' => 25,
+        'tiles_wide' => 50,
+        'tiles_high' => 25,
         'tile' => 70,
     ];
 
-    const TILES = 'tiles';
-    const PIXELS = 'pixels';
-
     public function __construct($config)
     {
+        $region = new Region($config);
+        $grid = new Grid($region);
+        $grid->color()->setColor(255, 0,0);
+
         $this->config = array_merge($this->defaultConfig, $config);
-        $this->_canvas = imagecreatetruecolor(
-            $this->width(self::PIXELS) + 1,
-            $this->height(self::PIXELS) + 1
-        );
-        $gridColor = $this->color(80,80,80);
-        foreach(range(0, $this->width() - 0) as $i => $x) {
-            $xLine[] = new Line(
-                new Point($this->config['tile'] * $x, 0),
-                new Point($this->config['tile'] * $x, $this->height(self::PIXELS)),
-                $this->grey(50),
-                $this->_canvas
-            );
-            $xLine[$i]->add();
-        }
-        foreach(range(0, $this->height() - 0) as $i => $y) {
-            $yLine[] = new Line(
-                new Point(0, $this->config['tile'] * $y),
-                new Point($this->width(self::PIXELS), $this->config['tile'] * $y),
-                $this->grey(50),
-                $this->_canvas
-            );
-            $yLine[$i]->add();
-        }
+
+        $this->_canvas = $region->out();
+        $this->renderGrid($region, $grid);
+
+        $this->subRegion($region);
     }
 
     public function get()
@@ -56,28 +39,38 @@ class Canvas
         imagedestroy($this->_canvas);
     }
 
-    private function width($scale = self::TILES)
+    private function subRegion(Region $region)
     {
-        return $scale === self::TILES
-            ? $this->config['width']
-            : $this->config['width'] * $this->config['tile'];
+        $config = [
+            'tile_size' => (int) $region->tileSize() / 2,
+            'origin_x' => (int) $region->x(25),
+            'origin_y' => (int) $region->y(25),
+            'ground_color' => (new Color())->grey(100),
+            'tiles_wide' => $region->tilesWide(),
+            'tiles_high' => $region->tilesHigh(),
+        ];
+        $subRegion = new Region($config);
+        $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
+        $subRegion->add($this->_canvas);
+        $this->renderGrid($subRegion, $subGrid);
+
     }
 
-    private function height($scale = self::TILES)
+    /**
+     * @param Region $region
+     * @param Grid $grid
+     * @return void
+     */
+    private function renderGrid(Region $region, Grid $grid): void
     {
-        return $scale === self::TILES
-            ? $this->config['height']
-            : $this->config['height'] * $this->config['tile'];
+        foreach (range(0, $region->tilesWide()) as $i => $x) {
+            $xLine[] = $grid->xLine($i);
+            $xLine[$i]->add($this->_canvas);
+        }
+        foreach (range(0, $region->tilesHigh()) as $i => $y) {
+            $yLine[] = $grid->yLine($i);
+            $yLine[$i]->add($this->_canvas);
+        }
     }
 
-    private function color($r, $g, $b)
-    {
-        return imagecolorallocate($this->_canvas, $r, $g, $b);
-    }
-
-    public function grey($percent)
-    {
-        $val = (int) 256 * ($percent / 100);
-        return imagecolorallocate($this->_canvas, $val, $val, $val);
-    }
 }
