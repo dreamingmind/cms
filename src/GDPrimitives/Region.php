@@ -35,4 +35,76 @@ class Region
         );
     }
 
+    public function tileSize()
+    {
+        return $this->getConfig('tile_size');
+    }
+
+    public function x($percent)
+    {
+        return (int) ($this->width() * ($percent / 100));
+    }
+
+    public function y($percent)
+    {
+        return (int) ($this->height() * ($percent / 100));
+    }
+
+    public function width()
+    {
+        return ($this->getConfig('tiles_wide') * $this->getConfig('tile_size')) + 1;
+    }
+
+    public function height()
+    {
+        return ($this->getConfig('tiles_high') * $this->getConfig('tile_size')) + 1;
+    }
+
+    public function out()
+    {
+        $this->_canvas = imagecreatetruecolor(
+            $this->width(),
+            $this->height()
+        );
+        imagefill(
+            $this->_canvas,
+            $this->getConfig('origin_x'),
+            $this->getConfig('origin_y'),
+            $this->getConfig('ground_color')->allocate($this->_canvas)
+        );
+        return $this->_canvas;
+    }
+
+    public function tilesHigh()
+    {
+        return $this->getConfig('tiles_high');
+    }
+
+    public function tilesWide()
+    {
+        return $this->getConfig('tiles_wide');
+    }
+
+    public function add($canvas)
+    {
+        imagefilledrectangle(
+            $canvas,
+            $this->getConfig('origin_x'),
+            $this->getConfig('origin_y'),
+            $this->getConfig('origin_x') + $this->width(),
+            $this->getConfig('origin_y') + $this->height(),
+            $this->getConfig('ground_color')->allocate($canvas)
+        );
+    }
+
+    public function originX()
+    {
+        return $this->getConfig('origin_x');
+    }
+
+    public function originY()
+    {
+        return $this->getConfig('origin_y');
+    }
+
 }
