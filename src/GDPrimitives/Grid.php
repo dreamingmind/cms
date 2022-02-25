@@ -109,7 +109,7 @@ class Grid
                 $column = collection(range(1, $this->region->tilesHigh()))
                     ->reduce(function($accum, $yIndex) use ($xIndex) {
                         $t = new Tile($xIndex, $yIndex, $this);
-                        $accum[$t->index] = $t;
+                        $accum[$t->getId()] = $t;
                         return $accum;
                     }, $accum);
                 $accum = array_merge($accum, $column);
