@@ -2,15 +2,15 @@
 
 namespace App\GDPrimitives;
 
-class PointPair
+class PointSet
 {
 
     /**
-     * @param Point $p1
-     * @param Point $p2
+     * @param Point[] $Pts
      */
-    public function __construct(Point $p1, Point $p2)
+    public function __construct(array $Pts)
     {
+
         $this->$p1 = $p1;
         $this->$p2 = $p2;
     }

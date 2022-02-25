@@ -19,10 +19,25 @@ class Canvas
         $grid = new Grid($region);
         $grid->color()->setColor(255, 0,0);
 
+        $tiles = $grid->getTiles();
+
         $this->_canvas = $region->out();
+        $t = $tiles['15-10'];
+//        imagefilledrectangle(
+        imagerectangle(
+            $this->_canvas,
+            $t->xLo(),
+            $t->yLo(),
+            $t->xHi(),
+            $t->yHi(),
+//            (new Color())->setColor(90,200, 55)->allocate($this->_canvas)
+            (new Color())->grey(100)->allocate($this->_canvas)
+        );
+
+
         $grid->add($this->_canvas);
 
-        $this->subRegion($region, $grid);
+//        $this->subRegion($region, $grid);
     }
 
     public function get()
@@ -51,10 +66,8 @@ class Canvas
             'tiles_high' => $region->tilesHigh(),
         ];
 
-
         $subRegion = new Region($config);
         $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
-
 
         $subRegion->add($this->_canvas);
         $subGrid->add($this->_canvas);

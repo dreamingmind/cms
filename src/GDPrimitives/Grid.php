@@ -102,5 +102,19 @@ class Grid
         }
     }
 
+    public function getTiles()
+    {
+        return collection(range(1, $this->region->tilesWide()))
+            ->reduce(function($accum, $xIndex) {
+                $column = collection(range(1, $this->region->tilesHigh()))
+                    ->reduce(function($accum, $yIndex) use ($xIndex) {
+                        $t = new Tile($xIndex, $yIndex, $this);
+                        $accum[$t->index] = $t;
+                        return $accum;
+                    }, $accum);
+                $accum = array_merge($accum, $column);
+                return $accum;
+            }, []);
+    }
 
 }
