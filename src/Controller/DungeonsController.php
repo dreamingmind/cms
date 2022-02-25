@@ -15,8 +15,9 @@ class DungeonsController extends AppController
     public function dun()
     {
         $Canvas = new Canvas([
-            'tiles_wide' => 50,
-            'tiles_high' => 25,
+            'tiles_wide' => 2,
+            'tiles_high' => 2,
+            'tile_size' => 200,
         ]);
         $Canvas->output();
     }
