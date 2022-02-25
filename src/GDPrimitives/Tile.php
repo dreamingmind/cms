@@ -2,18 +2,16 @@
 
 namespace App\GDPrimitives;
 
-use phpDocumentor\Reflection\PseudoTypes\NumericString;
-
 class Tile
 {
 
     public function __construct($xIndex, $yIndex, Grid $grid)
     {
-        $this->index = "$xIndex-$yIndex";
-        $this->xLo = $grid->getX($xIndex - 1) +1;
-        $this->xHi = $grid->getX($xIndex) - 1;
-        $this->yLo = $grid->getY($yIndex - 1) +1;
-        $this->yHi = $grid->getY($yIndex) - 1;
+        $this->index = [
+            'x' => $xIndex,
+            'y' => $yIndex,
+            'i' => "$xIndex-$yIndex"
+        ];
         $this->x = [
             'hi' => $grid->getX($xIndex) - 1,
             'lo' => $grid->getX($xIndex - 1) +1
@@ -22,6 +20,20 @@ class Tile
             'hi' => $grid->getY($yIndex) - 1,
             'lo' => $grid->getY($yIndex - 1) +1,
             ];
+    }
+
+    /**
+     * Get the x|y grid index or the unique concatenated identifier
+     *
+     * @param null|string $part
+     * @return int
+     */
+    public function getId($part = null)
+    {
+        if(is_null($part)) {
+            return $this->index['i'];
+        }
+        return $this->index[$part];
     }
 
     /**
@@ -53,13 +65,19 @@ class Tile
         return new Point($this->getX($xPC), $this->getY($yPC));
     }
 
-    private function loHi($i)
-    {
-        return in_array($i, ['lo', 'hi']);
-    }
-
-    private function percent(int $lo, int $hi, int $pc)
+    private function percent(int $lo, int $hi, int $pc): int
     {
         return (int) (($hi - $lo) * ($pc / 100)) + $lo;
     }
+
+    public function stroke($canvas, $width)
+    {
+        $r = new FlyweightRectangle();
+        $r->stroke(
+            $canvas,
+            [$this->getPoint(0,0), $this->getPoint(100, 100)],
+            $width
+        );
+    }
+
 }
