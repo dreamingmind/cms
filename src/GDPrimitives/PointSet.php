@@ -2,28 +2,33 @@
 
 namespace App\GDPrimitives;
 
+use App\Lib\AuthenticationTrait;
+
 class PointSet
 {
+
+    use AuthenticationTrait;
 
     /**
      * @param Point[] $Pts
      */
-    public function __construct(array $Pts)
+    public function __construct(iterable $Pts)
     {
+        if (!$this->isHomogenous($Pts, Point::class)) {
+            $msg = 'Only Points may be sent to the PointSet constructor';
+            throw new BadConstructorValueException($msg);
+        }
 
-        $this->$p1 = $p1;
-        $this->$p2 = $p2;
+        $this->Pts = $Pts;
     }
 
-    public function x($n)
+    public function count()
     {
-        $source = "p$n";
-        return $this->$source->x();
+        return count($this->Pts);
     }
 
-    public function y($n)
+    public function getPts()
     {
-        $source = "p$n";
-        return $this->$source->y();
+        return $this->Pts;
     }
 }
