@@ -39,16 +39,23 @@ class Canvas
 
     private function subRegion(Region $region, Grid $grid)
     {
+        $x = rand(0, $region->tilesWide()/2);
+        $y = rand(0, $region->tilesHigh()/2);
+
         $config = [
             'tile_size' => (int) $region->tileSize() / 2,
-            'origin_x' => (int) $grid->getX(2),
-            'origin_y' => (int) $grid->getY(3),
+            'origin_x' => (int) $grid->getX($x),
+            'origin_y' => (int) $grid->getY($y),
             'ground_color' => (new Color())->grey(100),
             'tiles_wide' => $region->tilesWide(),
             'tiles_high' => $region->tilesHigh(),
         ];
+
+
         $subRegion = new Region($config);
         $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
+
+
         $subRegion->add($this->_canvas);
         $subGrid->add($this->_canvas);
 
