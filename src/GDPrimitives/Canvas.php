@@ -22,17 +22,31 @@ class Canvas
         $tiles = $grid->getTiles();
 
         $this->_canvas = $region->out();
-        $t = $tiles['15-10'];
+        /* @var Tile $t */
+
+        $t = $tiles['2-2'];
 //        imagefilledrectangle(
         imagerectangle(
             $this->_canvas,
-            $t->xLo(),
-            $t->yLo(),
-            $t->xHi(),
-            $t->yHi(),
+            $t->getX('lo'),
+            $t->getY('lo'),
+            $t->getX('hi'),
+            $t->getY('hi'),
 //            (new Color())->setColor(90,200, 55)->allocate($this->_canvas)
             (new Color())->grey(100)->allocate($this->_canvas)
         );
+        $c = (new Color())->grey(0);
+        $l = new Line(
+            $t->getPoint(25, 25),
+            $t->getPoint(25, 100),
+            $c
+        );
+        $l->add($this->_canvas);
+
+        /* @var Tile $t */
+
+        $t = $tiles['1-1'];
+        $t->stroke($this->_canvas, 7);
 
 
         $grid->add($this->_canvas);
