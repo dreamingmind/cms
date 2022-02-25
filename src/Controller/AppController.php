@@ -50,4 +50,20 @@ class AppController extends Controller
          */
         //$this->loadComponent('FormProtection');
     }
+
+    /**
+     * array contain only same stack entity types as this stack set?
+     *
+     * @param StackEntity[] $data
+     * @return bool
+     */
+    private function isHomogenous($data)
+    {
+        $class_name = get_class($this->template);
+        return collection($data)
+            ->reduce(function($accum, $stackEntity, $index) use ($class_name) {
+                return $accum && (get_class($stackEntity) === $class_name);
+            }, true);
+    }
+
 }
