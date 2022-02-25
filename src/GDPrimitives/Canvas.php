@@ -19,12 +19,10 @@ class Canvas
         $grid = new Grid($region);
         $grid->color()->setColor(255, 0,0);
 
-        $this->config = array_merge($this->defaultConfig, $config);
-
         $this->_canvas = $region->out();
-        $this->renderGrid($region, $grid);
+        $grid->add($this->_canvas);
 
-        $this->subRegion($region);
+        $this->subRegion($region, $grid);
     }
 
     public function get()
@@ -39,12 +37,12 @@ class Canvas
         imagedestroy($this->_canvas);
     }
 
-    private function subRegion(Region $region)
+    private function subRegion(Region $region, Grid $grid)
     {
         $config = [
             'tile_size' => (int) $region->tileSize() / 2,
-            'origin_x' => (int) $region->x(25),
-            'origin_y' => (int) $region->y(25),
+            'origin_x' => (int) $grid->getX(2),
+            'origin_y' => (int) $grid->getY(3),
             'ground_color' => (new Color())->grey(100),
             'tiles_wide' => $region->tilesWide(),
             'tiles_high' => $region->tilesHigh(),
@@ -52,25 +50,8 @@ class Canvas
         $subRegion = new Region($config);
         $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
         $subRegion->add($this->_canvas);
-        $this->renderGrid($subRegion, $subGrid);
+        $subGrid->add($this->_canvas);
 
-    }
-
-    /**
-     * @param Region $region
-     * @param Grid $grid
-     * @return void
-     */
-    private function renderGrid(Region $region, Grid $grid): void
-    {
-        foreach (range(0, $region->tilesWide()) as $i => $x) {
-            $xLine[] = $grid->xLine($i);
-            $xLine[$i]->add($this->_canvas);
-        }
-        foreach (range(0, $region->tilesHigh()) as $i => $y) {
-            $yLine[] = $grid->yLine($i);
-            $yLine[$i]->add($this->_canvas);
-        }
     }
 
 }

@@ -71,7 +71,7 @@ class Grid
      * @param int $n grid increment
      * @return float|int
      */
-    private function getX($n)
+    public function getX($n)
     {
         return $n * $this->region->tileSize();
     }
@@ -80,8 +80,27 @@ class Grid
      * @param int $n grid increment
      * @return float|int
      */
-    private function getY($n)
+    public function getY($n)
     {
         return $n * $this->region->tileSize();
     }
+
+    /**
+     * @param Region $region
+     * @param Grid $grid
+     * @return void
+     */
+    public function add($canvas): void
+    {
+        foreach (range(0, $this->region->tilesWide()) as $i => $x) {
+            $xLine[] = $this->xLine($i);
+            $xLine[$i]->add($canvas);
+        }
+        foreach (range(0, $this->region->tilesHigh()) as $i => $y) {
+            $yLine[] = $this->yLine($i);
+            $yLine[$i]->add($canvas);
+        }
+    }
+
+
 }
