@@ -6,24 +6,32 @@ namespace App\GDPrimitives;
 class Line
 {
 
-    public function __construct(Point $pt1, Point $pt2, Color $color)
+    /**
+     * @var PointPair
+     */
+    private $pts;
+
+    public function __construct(Point $pt1, Point $pt2, Color $color = null)
     {
-        $this->pt1 = $pt1;
-        $this->pt2 = $pt2;
         $this->color = $color;
+        $this->pts = new PointPair($pt1, $pt2);
     }
 
     public function add($canvas)
     {
         imageline(
             $canvas,
-            $this->pt1->x(),
-            $this->pt1->y(),
-            $this->pt2->x(),
-            $this->pt2->y(),
+            $this->points()->getX('lo'),
+            $this->points()->getY('lo'),
+            $this->points()->getX('hi'),
+            $this->points()->getY('hi'),
             $this->color->allocate($canvas)
         );
+    }
 
+    public function points()
+    {
+        return $this->pts;
     }
 
 }
