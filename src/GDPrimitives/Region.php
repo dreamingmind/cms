@@ -33,7 +33,7 @@ class Region
     public function __construct($config = [])
     {
         $this->config = array_merge($this->defaultConfig, $config);
-        $this->color = $this->getConfig('ground_color', $this->getColor('ground'));
+        $this->color = $this->getConfig('ground_color', $this->_getColor('ground'));
     }
 
     public function tileSize()
@@ -71,7 +71,7 @@ class Region
             $this->_canvas,
             $this->getConfig('origin_x'),
             $this->getConfig('origin_y'),
-            $this->getColor('current')->allocate($this->_canvas)
+            $this->_getColor('current')->allocate($this->_canvas)
         );
         return $this->_canvas;
     }

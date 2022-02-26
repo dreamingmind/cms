@@ -10,7 +10,7 @@ use App\GDPrimitives\Color;
 trait ColorRegistryTrait
 {
 
-    public function getColor(string $key = null)
+    public function _getColor(string $key = null)
     {
         if ($key === 'current') {
             return $this->color;
@@ -18,7 +18,7 @@ trait ColorRegistryTrait
         return ColorRegistry::get($key);
     }
 
-    public function setColor(string $key, array $spec) {
+    public function _setColor(string $key, array $spec) {
         $this->color = ColorRegistry::set($key, $spec);
         return $this->color;
     }

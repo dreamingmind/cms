@@ -3,8 +3,6 @@
 namespace App\Lib;
 
 use App\GDPrimitives\Color;
-use Cake\Core\ObjectRegistry;
-use Cake\Utility\Hash;
 
 class ColorRegistry
 {

@@ -33,13 +33,13 @@ class Canvas
         $t->stroke(
             $this->_canvas,
             7,
-            $this->setColor('1-1', [0,200, 255])
+            $this->_setColor('1-1', [0,200, 255])
         );
 
         $points = [$t->points()->getPoint(50,50), $t->points()->getPoint(50,50)];
         $r = new Rectangle();
         $r->stroke($this->_canvas, $points,7);
-        debug($this->getColor());
+        debug($this->_getColor());
 
 
         $grid->add($this->_canvas);

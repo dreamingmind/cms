@@ -33,7 +33,7 @@ class Grid
     {
         $this->region = $region;
         $this->config = array_merge($this->defaultConfig, $config);
-        $this->color = $this->getConfig('grid_color', $this->getColor('grid'));
+        $this->color = $this->getConfig('grid_color', $this->_getColor('grid'));
     }
 
     public function color() : Color
