@@ -2,10 +2,10 @@
 
 namespace App\Lib;
 
-trait ColorTrait
+trait ColorRegistryTrait
 {
 
-    public function getColor(string $key)
+    public function getColor(string $key = null)
     {
         return ColorRegistry::get($key);
     }

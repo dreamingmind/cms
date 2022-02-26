@@ -2,10 +2,14 @@
 
 namespace App\GDPrimitives;
 
+use App\Lib\ColorRegistry;
+use App\Lib\ColorRegistryTrait;
 use Migrations\ConfigurationTrait;
 
 class Canvas
 {
+
+    use ColorRegistryTrait;
 
     protected $defaultConfig = [
         'tiles_wide' => 50,
@@ -28,12 +32,12 @@ class Canvas
 //        imagefilledrectangle(
         $t->stroke($this->_canvas, 1);
 
-        $c = (new Color())->grey(0);
         $l = new Line(
             $t->points()->getPoint(25, 25),
             $t->points()->getPoint(25, 100),
-            $c
+            $this->setColor('white', ['grey' => 100])
         );
+        debug($this->getColor(null));
         $l->add($this->_canvas);
 
         /* @var Tile $t */

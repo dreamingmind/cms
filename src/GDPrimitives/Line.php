@@ -3,12 +3,12 @@
 namespace App\GDPrimitives;
 
 
-use App\Lib\ColorTrait;
+use App\Lib\ColorRegistryTrait;
 
 class Line
 {
 
-    use ColorTrait;
+    use ColorRegistryTrait;
 
     /**
      * @var PointPair

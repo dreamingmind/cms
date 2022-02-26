@@ -20,8 +20,11 @@ class ColorRegistry
 
     protected static $colors = [];
 
-    public static function get($key)
+    public static function get($key = null)
     {
+        if (is_null($key)) {
+            return self::$colors;
+        }
         if (!key_exists($key, self::$colors)) {
             self::initialize($key);
         }
@@ -35,7 +38,7 @@ class ColorRegistry
      */
     public static function set($key, $color = [])
     {
-        return self::make($color, $key);
+        return self::make($key, $color);
     }
 
     private static function initialize($key)
