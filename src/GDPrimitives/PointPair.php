@@ -91,4 +91,20 @@ class PointPair
         return (int) (($hi - $lo) * ($pc / 100)) + $lo;
     }
 
+    /**
+     * @return Point[]
+     */
+    public function pair(): array
+    {
+        return [
+            new Point($this->getX('lo'), $this->getY('lo')),
+            new Point($this->getX('hi'), $this->getY('hi'))
+        ];
+    }
+
+    public function center(): Point
+    {
+        return $this->getPoint(50,50);
+    }
+
 }

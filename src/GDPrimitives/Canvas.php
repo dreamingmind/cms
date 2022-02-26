@@ -22,29 +22,25 @@ class Canvas
         $region = new Region($config);
         $grid = new Grid($region);
         $tiles = $grid->getTiles();
+        $r = new Rectangle();
+        $r->setColor('stroke', 'red', [255, 0, 0]);
 
         $this->_canvas = $region->canvas();
+
         /* @var Tile $t */
         $t = $tiles['2-2'];
-        $t->stroke($this->_canvas, 1);
+        $t->stroke($this->_canvas, 10);
 
         /* @var Tile $t */
         $t = $tiles['1-1'];
-        $t->stroke(
-            $this->_canvas,
-            7,
-            $this->_setColor('1-1', [0,200, 255])
-        );
+        $r->stroke($this->_canvas, $t->points()->pair(), 7);
 
-        $points = [$t->points()->getPoint(50,50), $t->points()->getPoint(50,50)];
-        $r = new Rectangle();
-        $r->setColor('stroke', 'red', [255, 0, 0]);
+        $points = [$t->points()->center(), $t->points()->center()];
         $r->stroke($this->_canvas, $points,7);
-//        debug($this->_getColor());
 
         $grid->add($this->_canvas);
 
-        $this->subRegion($region, $grid);
+//        $this->subRegion($region, $grid);
     }
 
     public function get()
