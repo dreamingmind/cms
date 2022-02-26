@@ -3,8 +3,12 @@
 namespace App\GDPrimitives;
 
 
+use App\Lib\ColorTrait;
+
 class Line
 {
+
+    use ColorTrait;
 
     /**
      * @var PointPair
@@ -13,7 +17,7 @@ class Line
 
     public function __construct(Point $pt1, Point $pt2, Color $color = null)
     {
-        $this->color = $color;
+        $this->color = $color ?? $this->getColor('stroke');
         $this->pts = new PointPair($pt1, $pt2);
     }
 
