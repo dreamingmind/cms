@@ -2,6 +2,7 @@
 
 namespace App\GDPrimitives;
 
+use App\Lib\ColorRegistryTrait;
 use App\Lib\ConfigTrait;
 use Cake\Utility\Hash;
 
@@ -9,6 +10,7 @@ class Region
 {
 
     use ConfigTrait;
+    use ColorRegistryTrait;
 
     protected $defaultConfig = [
         'origin_x' => 0,
@@ -23,16 +25,15 @@ class Region
      */
     public $config = [];
 
+    /**
+     * @var Color $color
+     */
+    public $color;
+
     public function __construct($config = [])
     {
         $this->config = array_merge($this->defaultConfig, $config);
-        $this->setConfig(
-            'ground_color',
-            $this->getConfig(
-                'ground_color',
-                (new Color())->setColor(193,179,131)
-            )
-        );
+        $this->color = $this->getConfig('ground_color', $this->getColor('ground'));
     }
 
     public function tileSize()
@@ -60,7 +61,7 @@ class Region
         return ($this->getConfig('tiles_high') * $this->getConfig('tile_size')) + 1;
     }
 
-    public function out()
+    public function canvas()
     {
         $this->_canvas = imagecreatetruecolor(
             $this->width(),
@@ -70,7 +71,7 @@ class Region
             $this->_canvas,
             $this->getConfig('origin_x'),
             $this->getConfig('origin_y'),
-            $this->getConfig('ground_color')->allocate($this->_canvas)
+            $this->getColor('current')->allocate($this->_canvas)
         );
         return $this->_canvas;
     }

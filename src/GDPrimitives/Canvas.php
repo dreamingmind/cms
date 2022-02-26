@@ -23,7 +23,7 @@ class Canvas
         $grid = new Grid($region);
         $tiles = $grid->getTiles();
 
-        $this->_canvas = $region->out();
+        $this->_canvas = $region->canvas();
         /* @var Tile $t */
         $t = $tiles['2-2'];
         $t->stroke($this->_canvas, 1);
