@@ -20,7 +20,6 @@ class Canvas
         $grid->color()->setColor(255, 0,0);
 
         $tiles = $grid->getTiles();
-        debug($tiles);
 
         $this->_canvas = $region->out();
         /* @var Tile $t */
