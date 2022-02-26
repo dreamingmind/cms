@@ -5,6 +5,15 @@ namespace App\GDPrimitives;
 class Tile
 {
 
+    /**
+     * @var array
+     */
+    private $index;
+    /**
+     * @var PointPair
+     */
+    private $pts;
+
     public function __construct($xIndex, $yIndex, Grid $grid)
     {
         $this->index = [
@@ -12,14 +21,10 @@ class Tile
             'y' => $yIndex,
             'i' => "$xIndex-$yIndex"
         ];
-        $this->x = [
-            'hi' => $grid->getX($xIndex) - 1,
-            'lo' => $grid->getX($xIndex - 1) +1
-            ];
-        $this->y = [
-            'hi' => $grid->getY($yIndex) - 1,
-            'lo' => $grid->getY($yIndex - 1) +1,
-            ];
+        $this->pts = new PointPair(
+            new Point($grid->getX($xIndex) - 1, $grid->getY($yIndex) - 1),
+            new Point($grid->getX($xIndex - 1) +1, $grid->getY($yIndex - 1) +1)
+        );
     }
 
     /**
@@ -42,10 +47,7 @@ class Tile
      */
     public function getX($i)
     {
-        if(is_numeric($i)) {
-            return $this->percent($this->getX('lo'), $this->getX('hi'), $i);
-        }
-        return $this->x[$i];
+        return $this->pts->getX($i);
     }
 
     /**
@@ -54,28 +56,21 @@ class Tile
      */
     public function getY($i)
     {
-        if(is_numeric($i)) {
-            return $this->percent($this->getY('lo'), $this->getY('hi'), $i);
-        }
-        return $this->y[$i];
+        return $this->pts->getY($i);
     }
 
     public function getPoint($xPC, $yPC)
     {
-        return new Point($this->getX($xPC), $this->getY($yPC));
+        return $this->pts->getPoint($xPC, $yPC);
     }
 
-    private function percent(int $lo, int $hi, int $pc): int
-    {
-        return (int) (($hi - $lo) * ($pc / 100)) + $lo;
-    }
 
     public function stroke($canvas, $width, $color = null)
     {
         $r = new Rectangle();
         $r->stroke(
             $canvas,
-            [$this->getPoint(0,0), $this->getPoint(100, 100)],
+            [$this->pts->getPoint(0,0), $this->pts->getPoint(100, 100)],
             $width,
             $color
         );
