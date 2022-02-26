@@ -22,30 +22,13 @@ class Canvas
         $region = new Region($config);
         $grid = (new Grid($region));
         $grid->_setColor('black', ['grey' => 100]);
-//        $grid->_setColor('black', );
-        $r = new Rectangle();
-        $r->setColor('stroke', 'red', [255, 0, 0]);
 
         $this->_canvas = $region->canvas();
 
-//        /* @var Tile $t */
-//        $t = $tiles['2-2'];
-//        $t->stroke($this->_canvas, 10);
-//
-//        /* @var Tile $t */
-//        $t = $tiles['1-1'];
-//        $r->stroke($this->_canvas, $t->points()->pair(), 7);
-//
-//        $points = [$t->points()->center(), $t->points()->center()];
-//        $r->stroke($this->_canvas, $points,7);
-
-        $this->randomBlocks($grid, $region, $r);
-
         $grid->add($this->_canvas);
 
-//        debug($this->_getColor());
 
-        $this->subRegion($region, $grid);
+//        $this->subRegion($region, $grid);
     }
 
     public function get()
