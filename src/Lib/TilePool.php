@@ -15,7 +15,7 @@ class TilePool
     /**
      * @var Tile[]
      */
-    private $tiles;
+    private $tiles = [];
 
     public function __construct(Grid $grid)
     {
@@ -25,16 +25,18 @@ class TilePool
                 collection(range(1, $this->grid()->region()->tilesHigh()))
                     ->reduce(function($accum, $yIndex) use ($xIndex) {
                         $t = new Tile($xIndex, $yIndex, $this->grid());
-                        $accum[$t->getId()] = $t;
-                        return $accum;
-                    }, $accum);
-                $accum = array_merge($accum, $column);
-                return $accum;
+                        $this->tiles[$t->getId()] = $t;
+                    }, []);
             }, $this->tiles);
     }
 
-    public function grid()
+    public function grid(): Grid
     {
         return $this->grid;
+    }
+
+    public function tiles(): array
+    {
+        return $this->tiles;
     }
 }
