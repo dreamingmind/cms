@@ -39,24 +39,13 @@ class Canvas
 //        $points = [$t->points()->center(), $t->points()->center()];
 //        $r->stroke($this->_canvas, $points,7);
 
-        $tiles = $grid->getTiles();
-        foreach(range(1, 1000) as $c) {
-            $xi = rand(1, $region->tilesWide());
-            $yi = rand(1, $region->tilesHigh());
-            /* @var Tile $t */
-            $t = $tiles["$xi-$yi"];
-//            $p = $t->points()->center();
-//            $r->stroke($this->_canvas, $t->points()->pair(), 7);
-
-            $r->fill($this->_canvas, $t);
-//            $r->fill($this->_canvas, $t->points()->pair()[0], $t->points()->pair()[1]);
-        }
+        $this->randomBlocks($grid, $region, $r);
 
         $grid->add($this->_canvas);
 
 //        debug($this->_getColor());
 
-//        $this->subRegion($region, $grid);
+        $this->subRegion($region, $grid);
     }
 
     public function get()
@@ -88,9 +77,31 @@ class Canvas
         $subRegion = new Region($config);
         $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
 
+
         $subRegion->add($this->_canvas);
         $subGrid->add($this->_canvas);
 
+        $this->randomBlocks($subGrid, $subRegion, new Rectangle());
+
+    }
+
+    /**
+     * @param Grid $grid
+     * @param Region $region
+     * @param Rectangle $r
+     * @return void
+     */
+    private function randomBlocks(Grid $grid, Region $region, Rectangle $r): void
+    {
+        $tiles = $grid->getTiles();
+        foreach (range(1, 1000) as $c) {
+            $xi = rand(1, $region->tilesWide());
+            $yi = rand(1, $region->tilesHigh());
+            /* @var Tile $t */
+            $t = $tiles["$xi-$yi"];
+
+            $r->fill($this->_canvas, $t);
+        }
     }
 
 }
