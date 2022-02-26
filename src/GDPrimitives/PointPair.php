@@ -4,7 +4,7 @@ namespace App\GDPrimitives;
 
 use App\Lib\AuthenticationTrait;
 
-class PointSet
+class PointPair
 {
 
     use AuthenticationTrait;

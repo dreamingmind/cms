@@ -26,15 +26,8 @@ class Canvas
 
         $t = $tiles['2-2'];
 //        imagefilledrectangle(
-        imagerectangle(
-            $this->_canvas,
-            $t->getX('lo'),
-            $t->getY('lo'),
-            $t->getX('hi'),
-            $t->getY('hi'),
-//            (new Color())->setColor(90,200, 55)->allocate($this->_canvas)
-            (new Color())->grey(100)->allocate($this->_canvas)
-        );
+        $t->stroke($this->_canvas, 1);
+
         $c = (new Color())->grey(0);
         $l = new Line(
             $t->getPoint(25, 25),
@@ -46,12 +39,21 @@ class Canvas
         /* @var Tile $t */
 
         $t = $tiles['1-1'];
-        $t->stroke($this->_canvas, 7);
+        $t->stroke(
+            $this->_canvas,
+            7,
+            (new Color())->setColor(0,200, 255)
+        );
+
+        $points = [$t->getPoint(50,50), $t->getPoint(50,50)];
+        $r = new Rectangle();
+        $r->getColor('stroke')->setColor(0, 255, 100);
+        $r->stroke($this->_canvas, $points,7);
 
 
         $grid->add($this->_canvas);
 
-//        $this->subRegion($region, $grid);
+        $this->subRegion($region, $grid);
     }
 
     public function get()

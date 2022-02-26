@@ -70,13 +70,14 @@ class Tile
         return (int) (($hi - $lo) * ($pc / 100)) + $lo;
     }
 
-    public function stroke($canvas, $width)
+    public function stroke($canvas, $width, $color = null)
     {
-        $r = new FlyweightRectangle();
+        $r = new Rectangle();
         $r->stroke(
             $canvas,
             [$this->getPoint(0,0), $this->getPoint(100, 100)],
-            $width
+            $width,
+            $color
         );
     }
 
