@@ -55,8 +55,7 @@ class Tile
                 $this->pts->getPoint(0,0),
                 $this->pts->getPoint(100, 100)
             ],
-            $width,
-            $color
+            $width
         );
     }
 

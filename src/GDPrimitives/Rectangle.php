@@ -3,9 +3,12 @@
 namespace App\GDPrimitives;
 
 use App\Lib\ColorRegistry;
+use App\Lib\ColorRegistryTrait;
 
 class Rectangle
 {
+
+    use ColorRegistryTrait;
 
     /**
      * @var Color[]
@@ -25,16 +28,16 @@ class Rectangle
      * @param Color|null $color
      * @return void
      */
-    public function stroke($canvas, array $points, $width, Color $color = null)
+    public function stroke($canvas, array $points, $width)
     {
         $color = $color ?? $this->getColor('stroke');
 
         foreach (range(0, $width - 1) as $count) {
-            $this->perimeter($canvas, $points, $count, $color);
+            $this->perimeter($canvas, $points, $count);
         }
     }
 
-    private function perimeter($canvas, $points, $count, $color)
+    private function perimeter($canvas, $points, $count)
     {
         /* @var Point $p1 */
         /* @var Point $p2 */
@@ -47,13 +50,12 @@ class Rectangle
             $p1->y() + $count,
             $p2->x() - $count,
             $p2->y() - $count,
-//            (new Color())->setColor(90,200, 55)->allocate($this->_canvas)
-            $this->getColor('fill')->allocate($canvas)
+            $this->getColor('stroke')->allocate($canvas)
         );
     }
 
     /**
-     * @param string $type 'stoke' or 'color'
+     * @param string $type 'stroke' or 'fill'
      * @return Color|array
      */
     public function getColor($type)
@@ -61,10 +63,24 @@ class Rectangle
         if (in_array($type, ['stroke', 'fill'])) {
             return $this->color[$type];
         }
-        if ($type === 'current') {
-            return $this->color;
+        return $this->_getColor($type);
+    }
+
+    /**
+     * @param string $type 'fill' or 'stroke'
+     * @param string|Color $key
+     * @param $specs ['grey' => %] or [r-val, g-val, b-val]
+     * @return void
+     */
+    public function setColor($type, $key, $specs = [])
+    {
+        if ($key instanceof Color) {
+            $this->color[$type] = $key;
         }
-        return ColorRegistry::get($type);
+        else {
+            $this->color[$type] = ColorRegistry::set($key, $specs);
+        }
+        return $this->color[$type];
     }
 
 }

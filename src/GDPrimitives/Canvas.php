@@ -38,9 +38,9 @@ class Canvas
 
         $points = [$t->points()->getPoint(50,50), $t->points()->getPoint(50,50)];
         $r = new Rectangle();
+        $r->setColor('stroke', 'red', [255, 0, 0]);
         $r->stroke($this->_canvas, $points,7);
-        debug($this->_getColor());
-
+//        debug($this->_getColor());
 
         $grid->add($this->_canvas);
 
