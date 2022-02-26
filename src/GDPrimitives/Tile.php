@@ -2,7 +2,9 @@
 
 namespace App\GDPrimitives;
 
-class Tile
+use App\Lib\PointPairInterface;
+
+class Tile implements PointPairInterface
 {
 
     /**
@@ -41,7 +43,8 @@ class Tile
         return $this->index[$part];
     }
 
-    public function points()
+
+    public function points(): PointPair
     {
         return $this->pts;
     }

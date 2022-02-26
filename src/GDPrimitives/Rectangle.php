@@ -4,6 +4,7 @@ namespace App\GDPrimitives;
 
 use App\Lib\ColorRegistry;
 use App\Lib\ColorRegistryTrait;
+use App\Lib\PointPairInterface;
 
 class Rectangle
 {
@@ -19,6 +20,26 @@ class Rectangle
     {
         $this->color['stroke'] = ColorRegistry::get('stroke');
         $this->color['fill'] = ColorRegistry::get('fill');
+    }
+
+    /**
+     * @param $canvas
+     * @param Point|PointPairInterface $p1
+     * @param $p2
+     * @return void
+     */
+    public function fill($canvas, $p1, $p2 = null)
+    {
+        if (is_object($p1) && class_implements($p1, PointPairInterface::class)){
+            list($p1, $p2) = $p1->points()->pair();
+        }
+        imagefilledrectangle(
+            $canvas,
+            $p1->x(),
+            $p1->y(),
+            $p2->x(),
+            $p2->y(),
+            $this->getColor('fill')->allocate($canvas));
     }
 
     /**

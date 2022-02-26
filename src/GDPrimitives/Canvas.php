@@ -20,25 +20,41 @@ class Canvas
     public function __construct($config)
     {
         $region = new Region($config);
-        $grid = new Grid($region);
-        $tiles = $grid->getTiles();
+        $grid = (new Grid($region));
+        $grid->_setColor('black', ['grey' => 100]);
+//        $grid->_setColor('black', );
         $r = new Rectangle();
         $r->setColor('stroke', 'red', [255, 0, 0]);
 
         $this->_canvas = $region->canvas();
 
-        /* @var Tile $t */
-        $t = $tiles['2-2'];
-        $t->stroke($this->_canvas, 10);
+//        /* @var Tile $t */
+//        $t = $tiles['2-2'];
+//        $t->stroke($this->_canvas, 10);
+//
+//        /* @var Tile $t */
+//        $t = $tiles['1-1'];
+//        $r->stroke($this->_canvas, $t->points()->pair(), 7);
+//
+//        $points = [$t->points()->center(), $t->points()->center()];
+//        $r->stroke($this->_canvas, $points,7);
 
-        /* @var Tile $t */
-        $t = $tiles['1-1'];
-        $r->stroke($this->_canvas, $t->points()->pair(), 7);
+        $tiles = $grid->getTiles();
+        foreach(range(1, 1000) as $c) {
+            $xi = rand(1, $region->tilesWide());
+            $yi = rand(1, $region->tilesHigh());
+            /* @var Tile $t */
+            $t = $tiles["$xi-$yi"];
+//            $p = $t->points()->center();
+//            $r->stroke($this->_canvas, $t->points()->pair(), 7);
 
-        $points = [$t->points()->center(), $t->points()->center()];
-        $r->stroke($this->_canvas, $points,7);
+            $r->fill($this->_canvas, $t);
+//            $r->fill($this->_canvas, $t->points()->pair()[0], $t->points()->pair()[1]);
+        }
 
         $grid->add($this->_canvas);
+
+//        debug($this->_getColor());
 
 //        $this->subRegion($region, $grid);
     }
