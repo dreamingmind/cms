@@ -2,6 +2,8 @@
 
 namespace App\GDPrimitives;
 
+use App\Lib\ColorRegistry;
+
 class Rectangle
 {
 
@@ -12,8 +14,8 @@ class Rectangle
 
     public function __construct()
     {
-        $this->color['stroke'] = (new Color())->grey(100);
-        $this->color['fill'] = (new Color())->grey(0);
+        $this->color['stroke'] = ColorRegistry::get('stroke');
+        $this->color['fill'] = ColorRegistry::get('fill');
     }
 
     /**
@@ -46,17 +48,23 @@ class Rectangle
             $p2->x() - $count,
             $p2->y() - $count,
 //            (new Color())->setColor(90,200, 55)->allocate($this->_canvas)
-            $color->allocate($canvas)
+            $this->getColor('fill')->allocate($canvas)
         );
     }
 
     /**
      * @param string $type 'stoke' or 'color'
-     * @return Color
+     * @return Color|array
      */
     public function getColor($type)
     {
-        return $this->color[$type];
+        if (in_array($type, ['stroke', 'fill'])) {
+            return $this->color[$type];
+        }
+        if ($type === 'current') {
+            return $this->color;
+        }
+        return ColorRegistry::get($type);
     }
 
 }

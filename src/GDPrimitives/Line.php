@@ -15,6 +15,16 @@ class Line
      */
     private $pts;
 
+    /**
+     * @var Color|null $color
+     */
+    protected $color;
+
+    /**
+     * @param Point $pt1
+     * @param Point $pt2
+     * @param Color|null $color
+     */
     public function __construct(Point $pt1, Point $pt2, Color $color = null)
     {
         $this->color = $color ?? $this->getColor('stroke');
