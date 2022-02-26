@@ -30,10 +30,10 @@ class Tile
     /**
      * Get the x|y grid index or the unique concatenated identifier
      *
-     * @param null|string $part
-     * @return int
+     * @param string|null $part
+     * @return mixed
      */
-    public function getId($part = null)
+    public function getId(string $part = null)
     {
         if(is_null($part)) {
             return $this->index['i'];
@@ -41,36 +41,20 @@ class Tile
         return $this->index[$part];
     }
 
-    /**
-     * @param $i 'lo', 'hi', int representing a % between lo & hi
-     * @return int
-     */
-    public function getX($i)
+    public function points()
     {
-        return $this->pts->getX($i);
+        return $this->pts;
     }
-
-    /**
-     * @param $i 'lo', 'hi', int representing a % between lo & hi
-     * @return int
-     */
-    public function getY($i)
-    {
-        return $this->pts->getY($i);
-    }
-
-    public function getPoint($xPC, $yPC)
-    {
-        return $this->pts->getPoint($xPC, $yPC);
-    }
-
 
     public function stroke($canvas, $width, $color = null)
     {
         $r = new Rectangle();
         $r->stroke(
             $canvas,
-            [$this->pts->getPoint(0,0), $this->pts->getPoint(100, 100)],
+            [
+                $this->pts->getPoint(0,0),
+                $this->pts->getPoint(100, 100)
+            ],
             $width,
             $color
         );

@@ -20,6 +20,7 @@ class Canvas
         $grid->color()->setColor(255, 0,0);
 
         $tiles = $grid->getTiles();
+        debug($tiles);
 
         $this->_canvas = $region->out();
         /* @var Tile $t */
@@ -30,8 +31,8 @@ class Canvas
 
         $c = (new Color())->grey(0);
         $l = new Line(
-            $t->getPoint(25, 25),
-            $t->getPoint(25, 100),
+            $t->points()->getPoint(25, 25),
+            $t->points()->getPoint(25, 100),
             $c
         );
         $l->add($this->_canvas);
@@ -45,7 +46,7 @@ class Canvas
             (new Color())->setColor(0,200, 255)
         );
 
-        $points = [$t->getPoint(50,50), $t->getPoint(50,50)];
+        $points = [$t->points()->getPoint(50,50), $t->points()->getPoint(50,50)];
         $r = new Rectangle();
         $r->getColor('stroke')->setColor(0, 255, 100);
         $r->stroke($this->_canvas, $points,7);
