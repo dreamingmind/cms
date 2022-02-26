@@ -4,9 +4,15 @@ namespace App\GDPrimitives;
 
 class Color
 {
-       protected $r = 255;
-       protected $g = 255;
-       protected $b = 255;
+    protected $r = 255;
+    protected $g = 255;
+    protected $b = 255;
+    protected $alias = '';
+
+    public function __construct($alias = 'made manually')
+    {
+        $this->alias = $alias;
+    }
 
     public function setColor($r, $g, $b): Color
     {

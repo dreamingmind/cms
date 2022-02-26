@@ -43,8 +43,9 @@ class ColorRegistry
 
     private static function initialize($key)
     {
-        $key = key_exists($key, self::$keys) ? $key : 'default';
-        $spec = self::$keys[$key];
+        $spec_key = key_exists($key, self::$keys) ? $key : 'default';
+        debug($spec_key);
+        $spec = self::$keys[$spec_key];
         self::make($key, $spec);
     }
 
@@ -55,7 +56,7 @@ class ColorRegistry
      */
     private static function make($key, $spec): Color
     {
-        $color = new Color();
+        $color = new Color($key);
         if (key_exists('grey', $spec)) {
             $color->grey($spec['grey']);
         }
@@ -66,6 +67,5 @@ class ColorRegistry
         self::$colors[$key] = $color;
         return $color;
     }
-
 
 }

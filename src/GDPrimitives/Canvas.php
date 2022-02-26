@@ -21,38 +21,25 @@ class Canvas
     {
         $region = new Region($config);
         $grid = new Grid($region);
-        $grid->color()->setColor(255, 0,0);
-
         $tiles = $grid->getTiles();
 
         $this->_canvas = $region->out();
         /* @var Tile $t */
-
         $t = $tiles['2-2'];
-//        imagefilledrectangle(
         $t->stroke($this->_canvas, 1);
 
-        $l = new Line(
-            $t->points()->getPoint(25, 25),
-            $t->points()->getPoint(25, 100),
-            $this->setColor('white', ['grey' => 100])
-        );
-        debug($this->getColor(null));
-        $l->add($this->_canvas);
-
         /* @var Tile $t */
-
         $t = $tiles['1-1'];
         $t->stroke(
             $this->_canvas,
             7,
-            (new Color())->setColor(0,200, 255)
+            $this->setColor('1-1', [0,200, 255])
         );
 
         $points = [$t->points()->getPoint(50,50), $t->points()->getPoint(50,50)];
         $r = new Rectangle();
-        $r->getColor('stroke')->setColor(0, 255, 100);
         $r->stroke($this->_canvas, $points,7);
+        debug($this->getColor());
 
 
         $grid->add($this->_canvas);

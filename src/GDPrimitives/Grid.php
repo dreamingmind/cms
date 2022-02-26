@@ -2,16 +2,22 @@
 
 namespace App\GDPrimitives;
 
+use App\Lib\ColorRegistryTrait;
 use App\Lib\ConfigTrait;
 
 class Grid
 {
 
     use ConfigTrait;
+    use ColorRegistryTrait;
 
     protected $defaultConfig = [
-        'grid_color' => null,
     ];
+
+    /**
+     * @var Color|null
+     */
+    protected $color = null;
 
     /**
      * @var array
@@ -27,18 +33,12 @@ class Grid
     {
         $this->region = $region;
         $this->config = array_merge($this->defaultConfig, $config);
-        $this->setConfig(
-            'grid_color',
-            $this->getConfig(
-                'grid_color',
-                (new Color())->grey(50)
-            )
-        );
+        $this->color = $this->getConfig('grid_color', $this->getColor('grid'));
     }
 
     public function color() : Color
     {
-        return $this->getConfig('grid_color');
+        return $this->color;
     }
 
     public function xLine($x)
