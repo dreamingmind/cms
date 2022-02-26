@@ -44,12 +44,12 @@ class Grid
     public function xLine($x)
     {
         $p1 = new Point(
-            $this->getX($x) + $this->region->originX(),
-            $this->region->y(0) + $this->region->originY()
+            $this->getX($x),
+            $this->getY(0)
         );
         $p2 = new Point(
-            $this->getX($x) + $this->region->originX(),
-            $this->region->y(100) + $this->region->originY()
+            $this->getX($x),
+            $this->getY($this->region->tilesHigh())
         );
         return new Line($p1, $p2, $this->color());
     }
@@ -57,12 +57,12 @@ class Grid
     public function yLine($y)
     {
         $p1 = new Point(
-            $this->region->x(0) + $this->region->originX(),
-            $this->getY($y) + $this->region->originY()
+            $this->getX(0),
+            $this->getY($y)
         );
         $p2 = new Point(
-            $this->region->x(100) + $this->region->originX(),
-            $this->getY($y) + $this->region->originY()
+            $this->getX($this->region->tilesWide()),
+            $this->getY($y)
         );
         return new Line($p1, $p2, $this->color());
     }
@@ -73,7 +73,7 @@ class Grid
      */
     public function getX($n)
     {
-        return $n * $this->region->tileSize();
+        return ($n * $this->region->tileSize()) + $this->region->originX();
     }
 
     /**
@@ -82,7 +82,7 @@ class Grid
      */
     public function getY($n)
     {
-        return $n * $this->region->tileSize();
+        return ($n * $this->region->tileSize()) + $this->region->originY();
     }
 
     /**
