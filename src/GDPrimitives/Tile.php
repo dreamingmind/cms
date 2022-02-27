@@ -32,7 +32,7 @@ class Tile implements PointPairInterface
     /**
      * Get the x|y grid index or the unique concatenated identifier
      *
-     * @param string|null $part
+     * @param string|null $part 'x', 'y', 'i', null (same as i)
      * @return mixed
      */
     public function getId(string $part = null)
@@ -47,19 +47,6 @@ class Tile implements PointPairInterface
     public function points(): PointPair
     {
         return $this->pts;
-    }
-
-    public function stroke($canvas, $width, $color = null)
-    {
-        $r = new Rectangle();
-        $r->stroke(
-            $canvas,
-            [
-                $this->pts->getPoint(0,0),
-                $this->pts->getPoint(100, 100)
-            ],
-            $width
-        );
     }
 
 }
