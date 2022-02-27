@@ -34,6 +34,25 @@ class Room
         $this->assemble();
     }
 
+    /**
+     * @param string $dir 'width' or 'height'
+     * @return int
+     */
+    public function room($dir)
+    {
+        return $this->$dir;
+    }
+
+    /**
+     * @param string $axis 'x' or 'y'
+     * @return int
+     */
+    public function origin($axis)
+    {
+        $property = "{$axis}_origin";
+        return $this->$property;
+    }
+
     public function assemble()
     {
         $x = $this->region->tilesWide() - $this->wide - 1;
