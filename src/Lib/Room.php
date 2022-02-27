@@ -9,6 +9,8 @@ use App\GDPrimitives\Rectangle;
 class Room
 {
 
+    use TileSetTrait;
+
     private $max = 10;
     private $min = 3;
     private $tiles = [];
@@ -45,8 +47,9 @@ class Room
         $r = new Rectangle();
         foreach (range($this->x_origin, $this->x_origin + $this->wide) as $x) {
             foreach (range($this->y_origin, $this->y_origin + $this->high) as $y) {
-                $tile = $this->tiles[$pool->key($x, $y)] = $pool->tile($x, $y);
-                $r->fill($canvas, $tile);
+                $key = $this->key($x, $y);
+                $this->tiles[$key] = $pool->tile($x, $y);
+                $r->fill($canvas, $this->tiles[$key]);
             }
         }
     }
