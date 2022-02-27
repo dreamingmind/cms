@@ -22,7 +22,9 @@ class Canvas
         $region = new Region($config);
         $grid = (new Grid($region));
         $grid->_setColor('black', ['grey' => 100]);
-        debug($grid->getTiles());
+        $grid->getTiles();
+//        $grid->getTiles();
+
 
         $this->_canvas = $region->canvas();
 

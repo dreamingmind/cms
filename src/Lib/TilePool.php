@@ -20,7 +20,7 @@ class TilePool
     public function __construct(Grid $grid)
     {
         $this->grid = $grid;
-        return collection(range(1, $this->grid()->region()->tilesWide()))
+        collection(range(1, $this->grid()->region()->tilesWide()))
             ->reduce(function($accum, $xIndex) {
                 collection(range(1, $this->grid()->region()->tilesHigh()))
                     ->reduce(function($accum, $yIndex) use ($xIndex) {
