@@ -22,14 +22,14 @@ class Canvas
         $region = new Region($config);
         $grid = (new Grid($region));
         $grid->_setColor('black', ['grey' => 100]);
-        $grid->getTiles();
-//        $grid->getTiles();
-
 
         $this->_canvas = $region->canvas();
-
         $grid->add($this->_canvas);
 
+        $this->randomBlocks(
+            $grid,
+            new Rectangle()
+        );
 
 //        $this->subRegion($region, $grid);
     }
@@ -77,14 +77,14 @@ class Canvas
      * @param Rectangle $r
      * @return void
      */
-    private function randomBlocks(Grid $grid, Region $region, Rectangle $r): void
+    private function randomBlocks(Grid $grid, Rectangle $r): void
     {
-        $tiles = $grid->getTiles();
+        $pool = $grid->getTiles();
         foreach (range(1, 1000) as $c) {
-            $xi = rand(1, $region->tilesWide());
-            $yi = rand(1, $region->tilesHigh());
+            $xi = rand(1, $grid->region()->tilesWide());
+            $yi = rand(1, $grid->region()->tilesHigh());
             /* @var Tile $t */
-            $t = $tiles["$xi-$yi"];
+            $t = $pool->tile($xi, $yi);
 
             $r->fill($this->_canvas, $t);
         }
