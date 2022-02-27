@@ -45,7 +45,7 @@ class TilePool
         return $this->tiles[$this->key($xi, $yi)];
     }
 
-    private function key(int $xi, int $yi): string
+    public function key(int $xi, int $yi): string
     {
         return "$xi-$yi";
     }

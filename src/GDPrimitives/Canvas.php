@@ -4,6 +4,7 @@ namespace App\GDPrimitives;
 
 use App\Lib\ColorRegistry;
 use App\Lib\ColorRegistryTrait;
+use App\Lib\Room;
 use Migrations\ConfigurationTrait;
 
 class Canvas
@@ -26,10 +27,15 @@ class Canvas
         $this->_canvas = $region->canvas();
         $grid->add($this->_canvas);
 
-        $this->randomBlocks(
-            $grid,
-            new Rectangle()
-        );
+//        $this->randomBlocks(
+//            $grid,
+//            new Rectangle()
+//        );
+
+        foreach (range(0,5) as $count) {
+            $room = new Room($grid->region());
+            $room->add($this->_canvas, $grid->getTiles());
+        }
 
 //        $this->subRegion($region, $grid);
     }
