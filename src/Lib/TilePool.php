@@ -8,8 +8,6 @@ use App\GDPrimitives\Tile;
 class TilePool
 {
 
-    use TileSetTrait;
-
     /**
      * @var Grid
      */
@@ -40,6 +38,36 @@ class TilePool
     public function tiles(): array
     {
         return $this->tiles;
+    }
+
+
+    public function tile(int $x, int $y): Tile
+    {
+        return $this->tiles[$this->key($x, $y)];
+    }
+
+    public function key(int $x, int $y): string
+    {
+        return "$x-$y";
+    }
+
+    public function lowestX() {
+        return collection($this->tiles())->min('x');
+    }
+
+    public function highestX()
+    {
+        return collection($this->tiles())->max('x');
+    }
+
+    public function lowestY()
+    {
+        return collection($this->tiles())->min('y');
+    }
+
+    public function higestY()
+    {
+        return collection($this->tiles())->max('y');
     }
 
 }
