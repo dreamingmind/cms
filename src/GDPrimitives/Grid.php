@@ -75,7 +75,7 @@ class Grid
      */
     public function getX($n)
     {
-        return ($n * $this->region->tileSize()) + $this->region->originX();
+        return ($n * $this->region->tileSize()) + $this->region->origin(Con::X);
     }
 
     /**
@@ -84,7 +84,7 @@ class Grid
      */
     public function getY($n)
     {
-        return ($n * $this->region->tileSize()) + $this->region->originY();
+        return ($n * $this->region->tileSize()) + $this->region->origin(Con::Y);
     }
 
     /**

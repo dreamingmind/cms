@@ -18,6 +18,9 @@ class Region /*extends Canvas*/
     use ConfigTrait;
     use ColorRegistryTrait;
 
+    /**
+     * @var array
+     */
     protected $defaultConfig = [
         'origin_x' => 0,
         'origin_y' => 0,
@@ -30,7 +33,6 @@ class Region /*extends Canvas*/
      * @var array
      */
     public $config = [];
-
     /**
      * @var Color $color
      */
@@ -45,6 +47,16 @@ class Region /*extends Canvas*/
     public function tileSize()
     {
         return $this->getConfig('tile_size');
+    }
+
+    /**
+     * @param string $axis Con::X or Con::Y
+     * @return int
+     */
+    public function origin($axis) : int
+    {
+        $axis = $axis === Con::X ? 'origin_x' : 'origin_y';
+        return $this->getConfig($axis, 0);
     }
 
     /**
@@ -87,8 +99,8 @@ class Region /*extends Canvas*/
         );
         imagefill(
             $this->_canvas,
-            $this->getConfig('origin_x'),
-            $this->getConfig('origin_y'),
+            $this->origin(Con::X),
+            $this->origin(Con::Y),
             $this->_getColor('current')->allocate($this->_canvas)
         );
         return $this->_canvas;
@@ -98,22 +110,13 @@ class Region /*extends Canvas*/
     {
         imagefilledrectangle(
             $canvas,
-            $this->getConfig('origin_x'),
-            $this->getConfig('origin_y'),
-            $this->getConfig('origin_x') + $this->width(Con::PIXEL),
-            $this->getConfig('origin_y') + $this->height(Con::PIXEL),
+            $this->origin(Con::X),
+            $this->origin(Con::Y),
+            $this->origin(Con::X) + $this->width(Con::PIXEL),
+            $this->origin(Con::Y) + $this->height(Con::PIXEL),
             $this->getConfig('ground_color')->allocate($canvas)
         );
     }
 
-    public function originX()
-    {
-        return $this->getConfig('origin_x');
-    }
-
-    public function originY()
-    {
-        return $this->getConfig('origin_y');
-    }
 
 }
