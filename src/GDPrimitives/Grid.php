@@ -38,12 +38,12 @@ class Grid
         $this->color = $this->getConfig('grid_color', $this->_getColor('grid'));
     }
 
-    public function color() : Color
-    {
-        return $this->color;
-    }
+//    public function color() : Color
+//    {
+//        return $this->color;
+//    }
 
-    public function xLine($x)
+    private function xLine($x)
     {
         $p1 = new Point(
             $this->getX($x),
@@ -53,10 +53,10 @@ class Grid
             $this->getX($x),
             $this->getY($this->region->height(Con::TILE))
         );
-        return new Line($p1, $p2, $this->color());
+        return new Line($p1, $p2, $this->_getColor('current'));
     }
 
-    public function yLine($y)
+    private function yLine($y)
     {
         $p1 = new Point(
             $this->getX(0),
@@ -66,7 +66,7 @@ class Grid
             $this->getX($this->region->width(Con::TILE)),
             $this->getY($y)
         );
-        return new Line($p1, $p2, $this->color());
+        return new Line($p1, $p2, $this->_getColor('current'));
     }
 
     /**
