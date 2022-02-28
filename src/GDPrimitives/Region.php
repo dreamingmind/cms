@@ -44,7 +44,10 @@ class Region /*extends Canvas*/
         $this->color = $this->getConfig('ground_color', $this->_getColor('ground'));
     }
 
-    public function tileSize()
+    /**
+     * @return int
+     */
+    public function tileSize(): int
     {
         return $this->getConfig('tile_size');
     }
@@ -53,7 +56,7 @@ class Region /*extends Canvas*/
      * @param string $axis Con::X or Con::Y
      * @return int
      */
-    public function origin($axis) : int
+    public function origin(string $axis) : int
     {
         $axis = $axis === Con::X ? 'origin_x' : 'origin_y';
         return $this->getConfig($axis, 0);
