@@ -38,7 +38,7 @@ class Canvas
             $room->add($this->_canvas, $grid->getTiles());
         }
 
-//        $this->subRegion($region, $grid);
+        $this->subRegion($region, $grid);
     }
 
     public function get()
@@ -74,7 +74,7 @@ class Canvas
         $subRegion->add($this->_canvas);
         $subGrid->add($this->_canvas);
 
-        $this->randomBlocks($subGrid, $subRegion, new Rectangle());
+        $this->randomBlocks($subGrid, new Rectangle());
 
     }
 
