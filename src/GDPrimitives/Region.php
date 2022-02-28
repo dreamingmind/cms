@@ -36,7 +36,7 @@ class Region /*extends Canvas*/
     /**
      * @var Color $color
      */
-    public $color;
+    private $color;
 
     public function __construct($config = [])
     {
