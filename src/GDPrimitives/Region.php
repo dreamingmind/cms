@@ -2,11 +2,17 @@
 
 namespace App\GDPrimitives;
 
+use App\Constants\Con;
 use App\Lib\ColorRegistryTrait;
 use App\Lib\ConfigTrait;
-use Cake\Utility\Hash;
+use App\Lib\Canvas;
 
-class Region
+/**
+ * Region class defines a rectangular area of operation
+ *
+ *
+ */
+class Region /*extends Canvas*/
 {
 
     use ConfigTrait;
@@ -43,29 +49,51 @@ class Region
 
     public function x($percent)
     {
-        return (int) ($this->width() * ($percent / 100));
+        return (int) ($this->width(Con::PIXEL) * ($percent / 100));
     }
 
     public function y($percent)
     {
-        return (int) ($this->height() * ($percent / 100));
+        return (int) ($this->height(Con::PIXEL) * ($percent / 100));
     }
 
-    public function width()
+    /**
+     * @param string $unit
+     * @return int
+     */
+    public function width(string $unit)
     {
-        return ($this->getConfig('tiles_wide') * $this->getConfig('tile_size')) + 1;
+        $axis = $this->getConfig('tiles_wide');
+        return $this->size($unit, $axis);
     }
 
-    public function height()
+    /**
+     * @param string $unit
+     * @return int
+     */
+    public function height(string $unit)
     {
-        return ($this->getConfig('tiles_high') * $this->getConfig('tile_size')) + 1;
+        $axis = $this->getConfig('tiles_high');
+        return $this->size($unit, $axis);
+    }
+
+    /**
+     * @param string $unit
+     * @param string $axis
+     * @return float|int|mixed
+     */
+    private function size(string $unit, string $axis)
+    {
+        return $unit === Con::TILE
+            ? $axis
+            : ($axis * $this->getConfig('tile_size')) + 1;
     }
 
     public function canvas()
     {
         $this->_canvas = imagecreatetruecolor(
-            $this->width(),
-            $this->height()
+            $this->width(Con::PIXEL),
+            $this->height(Con::PIXEL)
         );
         imagefill(
             $this->_canvas,
@@ -92,8 +120,8 @@ class Region
             $canvas,
             $this->getConfig('origin_x'),
             $this->getConfig('origin_y'),
-            $this->getConfig('origin_x') + $this->width(),
-            $this->getConfig('origin_y') + $this->height(),
+            $this->getConfig('origin_x') + $this->width(Con::PIXEL),
+            $this->getConfig('origin_y') + $this->height(Con::PIXEL),
             $this->getConfig('ground_color')->allocate($canvas)
         );
     }
