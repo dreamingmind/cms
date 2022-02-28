@@ -47,16 +47,6 @@ class Region /*extends Canvas*/
         return $this->getConfig('tile_size');
     }
 
-    public function x($percent)
-    {
-        return (int) ($this->width(Con::PIXEL) * ($percent / 100));
-    }
-
-    public function y($percent)
-    {
-        return (int) ($this->height(Con::PIXEL) * ($percent / 100));
-    }
-
     /**
      * @param string $unit
      * @return int
@@ -102,16 +92,6 @@ class Region /*extends Canvas*/
             $this->_getColor('current')->allocate($this->_canvas)
         );
         return $this->_canvas;
-    }
-
-    public function tilesHigh()
-    {
-        return $this->getConfig('tiles_high');
-    }
-
-    public function tilesWide()
-    {
-        return $this->getConfig('tiles_wide');
     }
 
     public function add($canvas)
