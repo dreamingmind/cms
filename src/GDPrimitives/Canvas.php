@@ -19,11 +19,11 @@ class Canvas
         'tile' => 70,
     ];
 
-    public function __construct($config)
+    public function __construct($config = [])
     {
-        $region = new Region($config);
-        $grid = (new Grid($region));
-        $grid->_setColor('black', ['grey' => 100]);
+        $region = new Region(['canvas' => new \App\Lib\Canvas([])]);
+        $grid = (new Grid($region))
+            ->_setColor('redish', [199, 66, 22]);
 
         $this->_canvas = $region->canvas();
         $grid->add($this->_canvas);
@@ -38,7 +38,7 @@ class Canvas
             $room->add($this->_canvas, $grid->getTiles());
         }
 
-        $this->subRegion($region, $grid);
+//        $this->subRegion($region, $grid);
     }
 
     public function get()
