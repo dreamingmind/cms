@@ -94,12 +94,10 @@ class Grid
     public function add($canvas): void
     {
         foreach (range(0, $this->region->tilesWide()) as $i => $x) {
-            $xLine[] = $this->xLine($i);
-            $xLine[$i]->add($canvas);
+            $this->xLine($i)->add($canvas);
         }
         foreach (range(0, $this->region->tilesHigh()) as $i => $y) {
-            $yLine[] = $this->yLine($i);
-            $yLine[$i]->add($canvas);
+            $this->yLine($i)->add($canvas);
         }
     }
 
