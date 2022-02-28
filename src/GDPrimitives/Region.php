@@ -48,20 +48,20 @@ class Region /*extends Canvas*/
     }
 
     /**
-     * @param string $unit
+     * @param string $unit Con::TILE or Con::PIXEL
      * @return int
      */
-    public function width(string $unit)
+    public function width(string $unit) : int
     {
         $axis = $this->getConfig('tiles_wide');
         return $this->size($unit, $axis);
     }
 
     /**
-     * @param string $unit
+     * @param string $unit Con::TILE or Con::PIXEL
      * @return int
      */
-    public function height(string $unit)
+    public function height(string $unit) : int
     {
         $axis = $this->getConfig('tiles_high');
         return $this->size($unit, $axis);

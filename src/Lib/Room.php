@@ -6,6 +6,7 @@ use App\Constants\Con;
 use App\GDPrimitives\Grid;
 use App\GDPrimitives\PointPair;
 use App\GDPrimitives\Rectangle;
+use App\GDPrimitives\Region;
 
 class Room
 {
@@ -24,6 +25,10 @@ class Room
      * @var int
      */
     private $y_origin;
+    /**
+     * @var Region
+     */
+    private $region;
 
     public function __construct($region)
     {
