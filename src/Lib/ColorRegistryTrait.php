@@ -35,6 +35,6 @@ trait ColorRegistryTrait
      */
     public function _setColor(string $key, array $spec) {
         $this->color = ColorRegistry::set($key, $spec);
-        return $this->color;
+        return $this;
     }
 }
