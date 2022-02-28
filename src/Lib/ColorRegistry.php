@@ -31,7 +31,7 @@ class ColorRegistry
 
     /**
      * @param string $key
-     * @param array $color ['grey' => %] or [r-val, g-val, b-val]
+     * @param array $color ['grey' => %] or [r, g, b]
      * @return Color|void
      */
     public static function set($key, $color = [])
