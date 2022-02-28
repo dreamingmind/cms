@@ -2,6 +2,7 @@
 
 namespace App\Lib;
 
+use App\Constants\Con;
 use App\GDPrimitives\Grid;
 use App\GDPrimitives\PointPair;
 use App\GDPrimitives\Rectangle;
@@ -53,8 +54,8 @@ class Room
 
     public function assemble()
     {
-        $x = $this->region->tilesWide() - $this->wide - 1;
-        $y = $this->region->tilesHigh() - $this->high - 1;
+        $x = $this->region->width(Con::TILE) - $this->wide - 1;
+        $y = $this->region->height(Con::TILE) - $this->high - 1;
         $this->x_origin = rand(2, $x);
         $this->y_origin = rand(2, $y);
     }

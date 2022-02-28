@@ -2,6 +2,7 @@
 
 namespace App\GDPrimitives;
 
+use App\Constants\Con;
 use App\Lib\ColorRegistry;
 use App\Lib\ColorRegistryTrait;
 use App\Lib\Room;
@@ -54,16 +55,16 @@ class Canvas
 
     private function subRegion(Region $region, Grid $grid)
     {
-        $x = rand(0, $region->tilesWide()/2);
-        $y = rand(0, $region->tilesHigh()/2);
+        $x = rand(0, $region->width(Con::TILE)/2);
+        $y = rand(0, $region->height(Con::TILE)/2);
 
         $config = [
             'tile_size' => (int) $region->tileSize() / 2,
             'origin_x' => (int) $grid->getX($x),
             'origin_y' => (int) $grid->getY($y),
             'ground_color' => (new Color())->grey(100),
-            'tiles_wide' => $region->tilesWide(),
-            'tiles_high' => $region->tilesHigh(),
+            'tiles_wide' => $region->width(Con::TILE),
+            'tiles_high' => $region->height(Con::TILE),
         ];
 
         $subRegion = new Region($config);
@@ -87,8 +88,8 @@ class Canvas
     {
         $pool = $grid->getTiles();
         foreach (range(1, 1000) as $c) {
-            $xi = rand(1, $grid->region()->tilesWide());
-            $yi = rand(1, $grid->region()->tilesHigh());
+            $xi = rand(1, $grid->region()->width(Con::TILE));
+            $yi = rand(1, $grid->region()->height(Con::TILE));
             /* @var Tile $t */
             $t = $pool->tile($xi, $yi);
 

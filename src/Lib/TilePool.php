@@ -2,6 +2,7 @@
 
 namespace App\Lib;
 
+use App\Constants\Con;
 use App\GDPrimitives\Grid;
 use App\GDPrimitives\Tile;
 
@@ -20,9 +21,9 @@ class TilePool
     public function __construct(Grid $grid)
     {
         $this->grid = $grid;
-        collection(range(1, $this->grid()->region()->tilesWide()))
+        collection(range(1, $this->grid()->region()->width(Con::TILE)))
             ->reduce(function($accum, $xIndex) {
-                collection(range(1, $this->grid()->region()->tilesHigh()))
+                collection(range(1, $this->grid()->region()->height(Con::TILE)))
                     ->reduce(function($accum, $yIndex) use ($xIndex) {
                         $t = new Tile($xIndex, $yIndex, $this->grid());
                         $this->tiles[$t->getId()] = $t;

@@ -2,6 +2,7 @@
 
 namespace App\GDPrimitives;
 
+use App\Constants\Con;
 use App\Lib\ColorRegistryTrait;
 use App\Lib\ConfigTrait;
 use App\Lib\TilePool;
@@ -50,7 +51,7 @@ class Grid
         );
         $p2 = new Point(
             $this->getX($x),
-            $this->getY($this->region->tilesHigh())
+            $this->getY($this->region->height(Con::TILE))
         );
         return new Line($p1, $p2, $this->color());
     }
@@ -62,7 +63,7 @@ class Grid
             $this->getY($y)
         );
         $p2 = new Point(
-            $this->getX($this->region->tilesWide()),
+            $this->getX($this->region->width(Con::TILE)),
             $this->getY($y)
         );
         return new Line($p1, $p2, $this->color());
@@ -93,10 +94,10 @@ class Grid
      */
     public function add($canvas): void
     {
-        foreach (range(0, $this->region->tilesWide()) as $i => $x) {
+        foreach (range(0, $this->region->width(Con::TILE)) as $i => $x) {
             $this->xLine($i)->add($canvas);
         }
-        foreach (range(0, $this->region->tilesHigh()) as $i => $y) {
+        foreach (range(0, $this->region->height(Con::TILE)) as $i => $y) {
             $this->yLine($i)->add($canvas);
         }
     }
