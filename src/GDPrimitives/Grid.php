@@ -74,7 +74,10 @@ class Grid
 
     public function getTiles()
     {
-        return new TilePool($this);
+        if(is_null($this->tiles)) {
+            $this->tiles = new TilePool($this);
+        }
+        return $this->tiles;
     }
 
     public function region()
