@@ -20,6 +20,8 @@ class Canvas
 
     public function __construct($config = [])
     {
+        $t = osdTime();
+        $t->start();
         $region = new Region(['canvas' => new \App\Lib\Canvas([])]);
         $grid = (new Grid($region))
             ->_setColor('redish', [199, 66, 22]);
@@ -38,6 +40,8 @@ class Canvas
         }
 
 //        $this->subRegion($region, $grid);
+        $t->end();
+        osd($t->result());
     }
 
     public function output()
