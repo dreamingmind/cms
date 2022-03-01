@@ -8,3 +8,5 @@
 /tmp
 /src/.DS_Store
 /webroot/img/dungeon.png
+/webroot/.DS_Store
+/tests.sqlite
