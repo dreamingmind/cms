@@ -39,7 +39,7 @@ class Canvas
             $room->add($region->image(), $grid->getTiles());
         }
 
-//        $this->subRegion($region, $grid);
+        $this->subRegion($region, $grid);
         $t->end();
         osd($t->result());
     }
@@ -72,8 +72,10 @@ class Canvas
 //        $subRegion = (new Region($config))
 //            ->_setColor('dark', ['grey' => 80]);
         $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
-
+        $subRegion->add($region->image());
         $subGrid->add($region->image());
+        osd($region->canvas()->getConfig());
+        osdd($subRegion->getConfig());
 
 //        $this->randomBlocks($subGrid, new Rectangle());
 
@@ -87,7 +89,7 @@ class Canvas
     private function randomBlocks(Grid $grid, Rectangle $r): void
     {
         $pool = $grid->getTiles();
-        foreach (range(1, 5) as $c) {
+        foreach (range(1, 80) as $c) {
             $xi = rand(1, $grid->region()->width(Con::TILE));
             $yi = rand(1, $grid->region()->height(Con::TILE));
             /* @var Tile $t */
