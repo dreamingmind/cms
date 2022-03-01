@@ -87,8 +87,8 @@ class Canvas
      */
     public function width(string $unit) : int
     {
-        $axis = $this->getConfig('tiles_wide');
-        return $this->size($unit, $axis);
+        $tileCount = $this->getConfig('tiles_wide');
+        return $this->size($unit, $tileCount);
     }
 
     /**
@@ -97,8 +97,8 @@ class Canvas
      */
     public function height(string $unit) : int
     {
-        $axis = $this->getConfig('tiles_high');
-        return $this->size($unit, $axis);
+        $tileCount = $this->getConfig('tiles_high');
+        return $this->size($unit, $tileCount);
     }
 
     public function image()

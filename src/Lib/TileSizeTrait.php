@@ -11,11 +11,12 @@ trait TileSizeTrait
      * @param string $axis
      * @return float|int|mixed
      */
-    protected function size(string $unit, string $axis)
+    protected function size(string $unit, int $tileCount)
     {
+        osd("$unit : $tileCount");
         return $unit === Con::TILE
-            ? $axis
-            : ($axis * $this->getConfig('tile_size')) + 1;
+            ? $tileCount
+            : ($tileCount * $this->getConfig('tile_size')) + 1;
     }
 
 

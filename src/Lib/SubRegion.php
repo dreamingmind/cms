@@ -93,20 +93,20 @@ class SubRegion extends Region
 
     public function width(string $unit): int
     {
-        $axis = $this->getConfig('tiles_wide');
-        if(!is_null($this->getConfig($axis))) {
-            return $this->size($unit, $axis);
+        $tileCount = $this->getConfig('tiles_wide');
+        if(!is_null($this->getConfig($tileCount))) {
+            return $this->size($unit, $tileCount);
         }
-        return parent::width($axis);
+        return parent::width($unit);
     }
 
     public function height(string $unit): int
     {
-        $axis = $this->getConfig('tiles_high');
-        if(!is_null($this->getConfig($axis))) {
-            return $this->size($unit, $axis);
+        $tileCount = $this->getConfig('tiles_high');
+        if(!is_null($this->getConfig($tileCount))) {
+            return $this->size($unit, $tileCount);
         }
-        return parent::width($axis);
+        return parent::width($unit);
     }
 
 }
