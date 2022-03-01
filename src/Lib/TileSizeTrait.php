@@ -13,7 +13,6 @@ trait TileSizeTrait
      */
     protected function size(string $unit, int $tileCount)
     {
-        osd("$unit : $tileCount");
         return $unit === Con::TILE
             ? $tileCount
             : ($tileCount * $this->getConfig('tile_size')) + 1;
