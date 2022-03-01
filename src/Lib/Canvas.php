@@ -31,6 +31,7 @@ class Canvas
 {
     use ConfigTrait;
     use ColorRegistryTrait;
+    use TileSizeTrait;
 
     /**
      * @var array
@@ -105,12 +106,12 @@ class Canvas
      * @param string $axis
      * @return float|int|mixed
      */
-    private function size(string $unit, string $axis)
-    {
-        return $unit === Con::TILE
-            ? $axis
-            : ($axis * $this->getConfig('tile_size')) + 1;
-    }
+//    private function size(string $unit, string $axis)
+//    {
+//        return $unit === Con::TILE
+//            ? $axis
+//            : ($axis * $this->getConfig('tile_size')) + 1;
+//    }
 
     public function image()
     {
