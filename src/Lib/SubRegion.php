@@ -79,12 +79,28 @@ class SubRegion extends Region
         );
     }
 
-
+    /**
+     * Get the configured or inherited Tile size in pixels
+     *
+     * @return int
+     */
     public function tileSize(): int
     {
         return $this->getConfig('tile_size', parent::tileSize()) ;
     }
 
+    /**
+     * Get upper-left x or y coordinate as a pixel value
+     *
+     * Region origins are stored as pixel values rather than
+     * Tile indexes because there is no guarantee that a region
+     * will start at a Tile point on the containing Canvas/Region
+     * nor that there is any relationship between the containing
+     * and local grid.
+     *
+     * @param string $axis Con::X or Con::Y
+     * @return int
+     */
     public function origin(string $axis): int
     {
         $axis = $axis === Con::X ? 'origin_x' : 'origin_y';

@@ -72,13 +72,14 @@ class Canvas
     }
 
     /**
+     * Canvas origin is locked to 0,0
+     *
      * @param string $axis Con::X or Con::Y
      * @return int
      */
     public function origin(string $axis) : int
     {
-        $axis = $axis === Con::X ? 'origin_x' : 'origin_y';
-        return $this->getConfig($axis, 0);
+        return 0;
     }
 
     /**
