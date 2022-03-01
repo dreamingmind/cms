@@ -20,6 +20,8 @@ class Canvas
 
     public function __construct($config)
     {
+        $t = osdTime();
+        $t->start();
         $region = new Region($config);
         $grid = (new Grid($region));
         $grid->_setColor('black', ['grey' => 100]);
@@ -38,6 +40,8 @@ class Canvas
         }
 
 //        $this->subRegion($region, $grid);
+        $t->end();
+        osd($t->result());
     }
 
     public function get()
@@ -73,7 +77,7 @@ class Canvas
         $subRegion->add($this->_canvas);
         $subGrid->add($this->_canvas);
 
-        $this->randomBlocks($subGrid, $subRegion, new Rectangle());
+        $this->randomBlocks($subGrid, new Rectangle());
 
     }
 
