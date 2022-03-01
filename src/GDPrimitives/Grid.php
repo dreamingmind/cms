@@ -31,6 +31,7 @@ class Grid
      * @var Region
      */
     protected $region;
+    protected $tiles;
 
     public function __construct(Region $region, $config = [])
     {
