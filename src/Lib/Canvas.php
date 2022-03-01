@@ -101,18 +101,6 @@ class Canvas
         return $this->size($unit, $axis);
     }
 
-    /**
-     * @param string $unit
-     * @param string $axis
-     * @return float|int|mixed
-     */
-//    private function size(string $unit, string $axis)
-//    {
-//        return $unit === Con::TILE
-//            ? $axis
-//            : ($axis * $this->getConfig('tile_size')) + 1;
-//    }
-
     public function image()
     {
         if (is_null($this->image)) {

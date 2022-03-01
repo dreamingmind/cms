@@ -55,14 +55,16 @@ class SubRegion extends Region
 
     public function __construct($config = [])
     {
-        parent::__construct($config);
+        $this->config = array_merge($this->defaultConfig, $config);
+        $this->color = $this->getConfig('ground_color', $this->_getColor('ground'));
         $this->canvas = $this->getConfig('canvas', false);
-        if (!$this->canvas || !($this->canvas instanceof Canvas)){
-            $msg = 'Missing App\Lib\Canvas object in config[image]';
+        if (!($this->canvas() instanceof Canvas)){
+            $msg = 'Missing App\Lib\Canvas object in config[canvas]';
             throw new BadConstructorValueException($msg);
         }
         $this->config = array_merge($this->defaultConfig, $config);
         $this->color = $this->getConfig('ground_color', $this->_getColor('ground'));
+//        parent::__construct($config);
     }
 
     public function add($canvas)

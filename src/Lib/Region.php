@@ -17,11 +17,15 @@ class Region implements RegionInterface
     /**
      * @var Canvas
      */
-    private $canvas;
+    public $canvas;
 
     public function __construct($config = [])
     {
-        $this->canvas = new Canvas($config);
+        if(is_null($this->canvas)) {
+            $c = $config['canvas'];
+            unset($config['canvas']);
+            $this->canvas = new Canvas($config);
+        }
     }
 
     public function canvas(): Canvas
@@ -29,14 +33,10 @@ class Region implements RegionInterface
         return $this->canvas;
     }
 
-    public function newSubRegion($x, $y, $w, $h): SubRegion
+    public function newSubRegion($config = []): SubRegion
     {
-        return new SubRegion([
-            'origin_x' => $x,
-            'origin_y' => $y,
-            'tiles_wide' => $w,
-            'tiles_high' => $h,
-        ]);
+        $config['canvas'] = $this->canvas();
+        return new SubRegion($config);
     }
 
     public function tileSize(): int
