@@ -25,7 +25,7 @@ class Canvas
             ->_setColor('redish', [199, 66, 22]);
 
         $this->_canvas = $region->image();
-        $grid->add($this->_canvas);
+        $grid->add($region->image());
 
         $this->randomBlocks(
             $grid,
@@ -34,15 +34,10 @@ class Canvas
 
         foreach (range(0,5) as $count) {
             $room = new Room($grid->region());
-            $room->add($this->_canvas, $grid->getTiles());
+            $room->add($region->image(), $grid->getTiles());
         }
 
-        $this->subRegion($region, $grid);
-    }
-
-    public function get()
-    {
-        return $this->_canvas;
+//        $this->subRegion($region, $grid);
     }
 
     public function output()
@@ -64,32 +59,31 @@ class Canvas
             'ground_color' => (new Color())->grey(100),
             'tiles_wide' => $region->width(Con::TILE),
             'tiles_high' => $region->height(Con::TILE),
-            'canvas' => $region->canvas()
+//            'canvas' => $region->canvas()
         ];
 
-//        $subRegion = $region->newSubRegion(10,10,10,10);
-        $subRegion = (new Region($config))
+        $subRegion = $region->newSubRegion($config)
             ->_setColor('dark', ['grey' => 80]);
-        osd($subRegion);
+
+//        $subRegion = (new Region($config))
+//            ->_setColor('dark', ['grey' => 80]);
         $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
 
-        $subRegion->image();
-        $subGrid->add($this->_canvas);
+        $subGrid->add($region->image());
 
-        $this->randomBlocks($subGrid, new Rectangle());
+//        $this->randomBlocks($subGrid, new Rectangle());
 
     }
 
     /**
      * @param Grid $grid
-     * @param Region $region
      * @param Rectangle $r
      * @return void
      */
     private function randomBlocks(Grid $grid, Rectangle $r): void
     {
         $pool = $grid->getTiles();
-        foreach (range(1, 1000) as $c) {
+        foreach (range(1, 5) as $c) {
             $xi = rand(1, $grid->region()->width(Con::TILE));
             $yi = rand(1, $grid->region()->height(Con::TILE));
             /* @var Tile $t */
