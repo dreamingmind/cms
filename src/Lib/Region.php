@@ -3,12 +3,16 @@
 namespace App\Lib;
 
 
+use App\Constants\Con;
+use App\GDPrimitives\Point;
+use App\GDPrimitives\PointPair;
+
 /**
  * Region class defines a rectangular area of operation
  *
  *
  */
-class Region implements RegionInterface
+class Region implements RegionInterface, PointPairInterface
 {
 
     use ColorRegistryTrait;
@@ -18,6 +22,10 @@ class Region implements RegionInterface
      * @var Canvas
      */
     public $canvas;
+    /**
+     * @var PointPair
+     */
+    private $pts;
 
     public function __construct($config = [])
     {
@@ -26,6 +34,10 @@ class Region implements RegionInterface
             unset($config['canvas']);
             $this->canvas = new Canvas($config);
         }
+        $this->pts = new PointPair(
+            new Point($this->origin(Con::X), $this->origin(Con::Y)),
+            new Point($this->width(Con::PIXEL), $this->height(Con::PIXEL))
+        );
     }
 
     public function canvas(): Canvas
@@ -62,5 +74,10 @@ class Region implements RegionInterface
     public function image()
     {
         return $this->canvas()->image();
+    }
+
+    public function points(): PointPair
+    {
+        return $this->pts;
     }
 }
