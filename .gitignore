@@ -4,3 +4,7 @@
 /.editorconfig
 /.gitattributes
 /.github
+/logs
+/tmp
+/src/.DS_Store
+/webroot/img/dungeon.png
