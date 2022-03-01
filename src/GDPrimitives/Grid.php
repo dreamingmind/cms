@@ -5,6 +5,7 @@ namespace App\GDPrimitives;
 use App\Constants\Con;
 use App\Lib\ColorRegistryTrait;
 use App\Lib\ConfigTrait;
+use App\Lib\Region;
 use App\Lib\TilePool;
 
 class Grid
@@ -36,37 +37,6 @@ class Grid
         $this->region = $region;
         $this->config = array_merge($this->defaultConfig, $config);
         $this->color = $this->getConfig('grid_color', $this->_getColor('grid'));
-    }
-
-//    public function color() : Color
-//    {
-//        return $this->color;
-//    }
-
-    private function xLine($x)
-    {
-        $p1 = new Point(
-            $this->getX($x),
-            $this->getY(0)
-        );
-        $p2 = new Point(
-            $this->getX($x),
-            $this->getY($this->region->height(Con::TILE))
-        );
-        return new Line($p1, $p2, $this->_getColor('current'));
-    }
-
-    private function yLine($y)
-    {
-        $p1 = new Point(
-            $this->getX(0),
-            $this->getY($y)
-        );
-        $p2 = new Point(
-            $this->getX($this->region->width(Con::TILE)),
-            $this->getY($y)
-        );
-        return new Line($p1, $p2, $this->_getColor('current'));
     }
 
     /**
@@ -110,6 +80,32 @@ class Grid
     public function region()
     {
         return $this->region;
+    }
+
+    private function xLine($x)
+    {
+        $p1 = new Point(
+            $this->getX($x),
+            $this->getY(0)
+        );
+        $p2 = new Point(
+            $this->getX($x),
+            $this->getY($this->region->height(Con::TILE))
+        );
+        return new Line($p1, $p2, $this->_getColor('current'));
+    }
+
+    private function yLine($y)
+    {
+        $p1 = new Point(
+            $this->getX(0),
+            $this->getY($y)
+        );
+        $p2 = new Point(
+            $this->getX($this->region->width(Con::TILE)),
+            $this->getY($y)
+        );
+        return new Line($p1, $p2, $this->_getColor('current'));
     }
 
 }

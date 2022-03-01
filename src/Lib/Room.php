@@ -3,10 +3,7 @@
 namespace App\Lib;
 
 use App\Constants\Con;
-use App\GDPrimitives\Grid;
-use App\GDPrimitives\PointPair;
 use App\GDPrimitives\Rectangle;
-use App\GDPrimitives\Region;
 
 class Room
 {

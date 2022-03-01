@@ -1,20 +1,34 @@
 <?php
 
-namespace App\GDPrimitives;
+namespace App\Lib;
 
 use App\Constants\Con;
-use App\Lib\ColorRegistryTrait;
-use App\Lib\ConfigTrait;
-use App\Lib\Canvas;
+use App\GDPrimitives\Color;
 
 /**
- * Region class defines a rectangular area of operation
+ * Canvas Class
  *
+ * Establishes the overall size and tile size for an image.
+ * The Canvas will always have an origin of 0,0 at the upper
+ * left corner. The lower right coordinate will be calculated
+ * form `tile` counts * tile size.
  *
+ * The Tile system is further defined and implemented by
+ * Grid, which acts as a decorator to Canvas.
+ *
+ * Canvas as the base for all regions (smaller rectangular areas).
+ *
+ * Rather than dealing with absolute coordinates at every stage,
+ * this class defines the graphic in terms of tiles.
+ * The tile size is provided, along with the count of tiles
+ * in the `x` and `y` directions (tiles_wide and tiles_high).
+ *
+ * From this foundation, all our operations can work with tiles
+ * as the unit of rendering. All the crazy absolute coordinates
+ * for drawing graphics will be hidden away.
  */
-class Region /*extends Canvas*/
+class Canvas
 {
-
     use ConfigTrait;
     use ColorRegistryTrait;
 
@@ -36,7 +50,11 @@ class Region /*extends Canvas*/
     /**
      * @var Color $color
      */
-    private $color;
+    protected $color;
+    /**
+     * @var false|\GdImage|resource
+     */
+    private $image;
 
     public function __construct($config = [])
     {
@@ -94,19 +112,21 @@ class Region /*extends Canvas*/
             : ($axis * $this->getConfig('tile_size')) + 1;
     }
 
-    public function canvas()
+    public function image()
     {
-        $this->_canvas = imagecreatetruecolor(
-            $this->width(Con::PIXEL),
-            $this->height(Con::PIXEL)
-        );
-        imagefill(
-            $this->_canvas,
-            $this->origin(Con::X),
-            $this->origin(Con::Y),
-            $this->_getColor('current')->allocate($this->_canvas)
-        );
-        return $this->_canvas;
+        if (is_null($this->image)) {
+            $this->image = imagecreatetruecolor(
+                $this->width(Con::PIXEL),
+                $this->height(Con::PIXEL)
+            );
+            imagefill(
+                $this->image,
+                $this->origin(Con::X),
+                $this->origin(Con::Y),
+                $this->_getColor('current')->allocate($this->image)
+            );
+        }
+        return $this->image;
     }
 
     public function add($canvas)

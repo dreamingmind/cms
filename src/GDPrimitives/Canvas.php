@@ -3,10 +3,9 @@
 namespace App\GDPrimitives;
 
 use App\Constants\Con;
-use App\Lib\ColorRegistry;
 use App\Lib\ColorRegistryTrait;
+use App\Lib\Region;
 use App\Lib\Room;
-use Migrations\ConfigurationTrait;
 
 class Canvas
 {
@@ -25,20 +24,20 @@ class Canvas
         $grid = (new Grid($region))
             ->_setColor('redish', [199, 66, 22]);
 
-        $this->_canvas = $region->canvas();
+        $this->_canvas = $region->image();
         $grid->add($this->_canvas);
 
-//        $this->randomBlocks(
-//            $grid,
-//            new Rectangle()
-//        );
+        $this->randomBlocks(
+            $grid,
+            new Rectangle()
+        );
 
         foreach (range(0,5) as $count) {
             $room = new Room($grid->region());
             $room->add($this->_canvas, $grid->getTiles());
         }
 
-//        $this->subRegion($region, $grid);
+        $this->subRegion($region, $grid);
     }
 
     public function get()
@@ -65,13 +64,16 @@ class Canvas
             'ground_color' => (new Color())->grey(100),
             'tiles_wide' => $region->width(Con::TILE),
             'tiles_high' => $region->height(Con::TILE),
+            'canvas' => $region->canvas()
         ];
 
-        $subRegion = new Region($config);
+//        $subRegion = $region->newSubRegion(10,10,10,10);
+        $subRegion = (new Region($config))
+            ->_setColor('dark', ['grey' => 80]);
+        osd($subRegion);
         $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
 
-
-        $subRegion->add($this->_canvas);
+        $subRegion->image();
         $subGrid->add($this->_canvas);
 
         $this->randomBlocks($subGrid, new Rectangle());
