@@ -64,7 +64,7 @@ class SubRegion extends Region
         }
         $this->config = array_merge($this->defaultConfig, $config);
         $this->color = $this->getConfig('ground_color', $this->_getColor('ground'));
-//        parent::__construct($config);
+        parent::__construct($config);
     }
 
     public function add($canvas)
@@ -94,7 +94,7 @@ class SubRegion extends Region
     public function width(string $unit): int
     {
         $tileCount = $this->getConfig('tiles_wide');
-        if(!is_null($this->getConfig($tileCount))) {
+        if(!is_null($tileCount)) {
             return $this->size($unit, $tileCount);
         }
         return parent::width($unit);
@@ -103,7 +103,7 @@ class SubRegion extends Region
     public function height(string $unit): int
     {
         $tileCount = $this->getConfig('tiles_high');
-        if(!is_null($this->getConfig($tileCount))) {
+        if(!is_null($tileCount)) {
             return $this->size($unit, $tileCount);
         }
         return parent::width($unit);
