@@ -1,13 +1,17 @@
 <?php
 
-namespace App\GDPrimitives;
+namespace App\Strategies;
 
 use App\Constants\Con;
+use App\GDPrimitives\Color;
+use App\GDPrimitives\Grid;
+use App\GDPrimitives\Rectangle;
+use App\GDPrimitives\Tile;
 use App\Lib\ColorRegistryTrait;
 use App\Lib\Region;
 use App\Lib\Room;
 
-class Canvas
+class StrategyOne
 {
 
     use ColorRegistryTrait;
@@ -20,9 +24,10 @@ class Canvas
 
     public function __construct($config = [])
     {
+
         $t = osdTime();
         $t->start();
-        $region = new Region(['canvas' => new \App\Lib\Canvas([])]);
+        $region = new Region($config);
         $grid = (new Grid($region))
             ->_setColor('redish', [199, 66, 22]);
 
@@ -63,19 +68,17 @@ class Canvas
             'ground_color' => (new Color())->grey(100),
             'tiles_wide' => $region->width(Con::TILE),
             'tiles_high' => $region->height(Con::TILE),
-//            'canvas' => $region->canvas()
         ];
 
         $subRegion = $region->newSubRegion($config)
             ->_setColor('dark', ['grey' => 80]);
 
-//        $subRegion = (new Region($config))
-//            ->_setColor('dark', ['grey' => 80]);
-        $subGrid = new Grid($subRegion, ['grid_color' => (new Color())->setColor(0, 127, 127)]);
+        $subGrid = new Grid(
+            $subRegion,
+            ['grid_color' => (new Color())->setColor(0, 127, 127)]
+        );
         $subRegion->add($region->image());
         $subGrid->add($region->image());
-//        osd($region->canvas()->getConfig());
-//        osdd($subRegion->getConfig());
 
         $this->randomBlocks($subGrid, new Rectangle());
 
@@ -89,7 +92,8 @@ class Canvas
     private function randomBlocks(Grid $grid, Rectangle $r): void
     {
         $pool = $grid->getTiles();
-        foreach (range(1, 300) as $c) {
+        $max = count($pool->tiles()) * .1;
+        foreach (range(1, $max) as $c) {
             $xi = rand(1, $grid->region()->width(Con::TILE));
             $yi = rand(1, $grid->region()->height(Con::TILE));
             /* @var Tile $t */
