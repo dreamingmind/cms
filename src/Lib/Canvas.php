@@ -4,6 +4,9 @@ namespace App\Lib;
 
 use App\Constants\Con;
 use App\GDPrimitives\Color;
+use App\Traits\ColorRegistryTrait;
+use App\Traits\ConfigTrait;
+use App\Traits\TileSizeTrait;
 
 /**
  * Canvas Class

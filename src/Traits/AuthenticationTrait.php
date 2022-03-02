@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Lib;
+namespace App\Traits;
 
 use phpDocumentor\Reflection\Types\Iterable_;
 

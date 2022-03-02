@@ -3,7 +3,7 @@
 namespace App\GDPrimitives;
 
 
-use App\Lib\ColorRegistryTrait;
+use App\Traits\ColorRegistryTrait;
 
 class Line
 {

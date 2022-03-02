@@ -5,6 +5,7 @@ namespace App\Lib;
 use App\Constants\Con;
 use App\GDPrimitives\BadConstructorValueException;
 use App\GDPrimitives\Color;
+use App\Traits\TileSizeTrait;
 
 /**
  * SubRegion Class

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Lib;
+namespace App\Traits;
 
 use App\GDPrimitives\Color;
+use App\Lib\ColorRegistry;
 
 /**
  * @property Color $color

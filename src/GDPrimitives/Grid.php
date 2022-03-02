@@ -3,8 +3,8 @@
 namespace App\GDPrimitives;
 
 use App\Constants\Con;
-use App\Lib\ColorRegistryTrait;
-use App\Lib\ConfigTrait;
+use App\Traits\ColorRegistryTrait;
+use App\Traits\ConfigTrait;
 use App\Lib\Region;
 use App\Lib\TilePool;
 

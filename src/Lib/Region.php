@@ -8,6 +8,8 @@ use App\GDPrimitives\Point;
 use App\GDPrimitives\PointPair;
 use App\Interfaces\PointPairInterface;
 use App\Interfaces\RegionInterface;
+use App\Traits\ColorRegistryTrait;
+use App\Traits\ConfigTrait;
 
 /**
  * Region class defines a rectangular area of operation

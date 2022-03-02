@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Lib;
+namespace App\Traits;
 
 use Cake\Utility\Hash;
 
