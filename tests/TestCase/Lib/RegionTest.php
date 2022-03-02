@@ -2,14 +2,14 @@
 
 namespace App\Test\TestCase\Lib;
 
-use App\GDPrimitives\Canvas;
+use App\Strategies\StrategyOne;
 
 class RegionTest extends \Cake\TestSuite\TestCase
 {
 
     public function test_Render()
     {
-        $c = new Canvas();
+        $c = new StrategyOne();
         $x = 'thing';
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\GDPrimitives\Canvas;
+use App\Strategies\StrategyOne;
 
 class DungeonsController extends AppController
 {
@@ -14,7 +14,7 @@ class DungeonsController extends AppController
 
     public function dun()
     {
-        $Canvas = new Canvas([
+        $Canvas = new StrategyOne([
             'tiles_wide' => 150,
             'tiles_high' => 80,
             'tile_size' => 70,

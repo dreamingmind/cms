@@ -1,13 +1,17 @@
 <?php
 
-namespace App\GDPrimitives;
+namespace App\Strategies;
 
 use App\Constants\Con;
+use App\GDPrimitives\Color;
+use App\GDPrimitives\Grid;
+use App\GDPrimitives\Rectangle;
+use App\GDPrimitives\Tile;
 use App\Lib\ColorRegistryTrait;
 use App\Lib\Region;
 use App\Lib\Room;
 
-class Canvas
+class StrategyOne
 {
 
     use ColorRegistryTrait;
@@ -42,7 +46,7 @@ class Canvas
 
         $this->subRegion($region, $grid);
         $t->end();
-        osd($t->result());
+//        osd($t->result());
     }
 
     public function output()
