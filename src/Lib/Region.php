@@ -22,8 +22,8 @@ class Region implements RegionInterface
     public function __construct($config = [])
     {
         if(is_null($this->canvas)) {
-            $c = $config['canvas'];
-            unset($config['canvas']);
+//            $c = $config['canvas'];
+//            unset($config['canvas']);
             $this->canvas = new Canvas($config);
         }
     }
