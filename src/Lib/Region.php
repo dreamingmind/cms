@@ -10,6 +10,7 @@ use App\Interfaces\PointPairInterface;
 use App\Interfaces\RegionInterface;
 use App\Traits\ColorRegistryTrait;
 use App\Traits\ConfigTrait;
+use App\Traits\RectangleRegistryTrait;
 
 /**
  * Region class defines a rectangular area of operation
@@ -21,6 +22,7 @@ class Region implements RegionInterface, PointPairInterface
 
     use ColorRegistryTrait;
     use ConfigTrait;
+    use RectangleRegistryTrait;
 
     /**
      * @var Canvas
@@ -30,6 +32,7 @@ class Region implements RegionInterface, PointPairInterface
      * @var PointPair
      */
     private $pts;
+    private $rectangle;
 
     public function __construct($config = [])
     {
