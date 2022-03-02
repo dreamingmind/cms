@@ -1,6 +1,6 @@
 <?php
 
+echo $this->Html->image('dungeon.png');
 
 ?>
 
-<img alt="gd image" src="/cms/img/dungeon.png">
