@@ -2,7 +2,7 @@
 
 namespace App\GDPrimitives;
 
-use App\Lib\PointPairInterface;
+use App\Interfaces\PointPairInterface;
 
 class Tile implements PointPairInterface
 {

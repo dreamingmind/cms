@@ -6,6 +6,8 @@ namespace App\Lib;
 use App\Constants\Con;
 use App\GDPrimitives\Point;
 use App\GDPrimitives\PointPair;
+use App\Interfaces\PointPairInterface;
+use App\Interfaces\RegionInterface;
 
 /**
  * Region class defines a rectangular area of operation
