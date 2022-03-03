@@ -4,9 +4,12 @@ namespace App\Lib;
 
 use App\Constants\Con;
 use App\GDPrimitives\Rectangle;
+use App\Traits\RectangleRegistryTrait;
 
 class Room
 {
+
+    use RectangleRegistryTrait;
 
     private $max = 10;
     private $min = 3;
@@ -26,6 +29,7 @@ class Room
      * @var Region
      */
     private $region;
+    private $rectangle;
 
     public function __construct($region)
     {
@@ -33,6 +37,7 @@ class Room
         $this->high = rand($this->min, $this->max);
         $this->region = $region;
         $this->assemble();
+        $this->rectangle = $this->_getRectangle('room');
     }
 
     /**
@@ -64,12 +69,12 @@ class Room
 
     public function add($canvas, TilePool $pool)
     {
-        $r = new Rectangle();
+//        $r = new Rectangle();
         foreach (range($this->x_origin, $this->x_origin + $this->wide) as $x) {
             foreach (range($this->y_origin, $this->y_origin + $this->high) as $y) {
                 $key = $pool->key($x, $y);
                 $this->tiles[$key] = $pool->tile($x, $y);
-                $r->fill($canvas, $this->tiles[$key]);
+                $this->rectangle->fill($canvas, $this->tiles[$key]);
             }
         }
     }

@@ -16,6 +16,7 @@ class Tile implements PointPairInterface
      */
     private $pts;
 
+
     public function __construct($xIndex, $yIndex, Grid $grid)
     {
         $this->index = [
@@ -47,6 +48,10 @@ class Tile implements PointPairInterface
     public function points(): PointPair
     {
         return $this->pts;
+    }
+
+    public function setUse($container) {
+
     }
 
 }

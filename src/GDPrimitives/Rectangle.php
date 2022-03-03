@@ -93,7 +93,7 @@ class Rectangle
      * @param $specs ['grey' => %] or [r-val, g-val, b-val]
      * @return void
      */
-    public function setColor($type, $key, $specs = [])
+    public function setColor($type, $key, $specs = []) : Rectangle
     {
         if ($key instanceof Color) {
             $this->color[$type] = $key;
@@ -101,7 +101,7 @@ class Rectangle
         else {
             $this->color[$type] = ColorRegistry::set($key, $specs);
         }
-        return $this->color[$type];
+        return $this/*->color[$type]*/;
     }
 
 }
