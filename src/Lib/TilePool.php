@@ -83,4 +83,9 @@ class TilePool
         $this->roomTiles[$key] = $this->tiles[$key];
     }
 
+    public function roomTiles()
+    {
+        return $this->roomTiles;
+    }
+
 }

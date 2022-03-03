@@ -84,4 +84,9 @@ class Room
         }
     }
 
+    public function tiles()
+    {
+        return $this->tiles;
+    }
+
 }
