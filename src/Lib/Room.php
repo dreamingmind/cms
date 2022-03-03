@@ -65,17 +65,22 @@ class Room
         $y = $this->region->height(Con::TILE) - $this->high - 1;
         $this->x_origin = rand(2, $x);
         $this->y_origin = rand(2, $y);
+
+        foreach (range($this->x_origin, $this->x_origin + $this->wide) as $x) {
+            foreach (range($this->y_origin, $this->y_origin + $this->high) as $y) {
+                $this->tiles["$x-$y"] = null;
+            }
+        }
     }
 
     public function add($canvas, TilePool $pool)
     {
 //        $r = new Rectangle();
-        foreach (range($this->x_origin, $this->x_origin + $this->wide) as $x) {
-            foreach (range($this->y_origin, $this->y_origin + $this->high) as $y) {
-                $key = $pool->key($x, $y);
+        foreach ($this->tiles as $key => $value) {
+            list($x, $y) = explode('-', $key);
                 $this->tiles[$key] = $pool->tile($x, $y);
+                $pool->insertRoomTile($key);
                 $this->rectangle->fill($canvas, $this->tiles[$key]);
-            }
         }
     }
 

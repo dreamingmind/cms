@@ -17,6 +17,7 @@ class TilePool
      * @var Tile[]
      */
     private $tiles = [];
+    private $roomTiles = [];
 
     public function __construct(Grid $grid)
     {
@@ -40,7 +41,6 @@ class TilePool
     {
         return $this->tiles;
     }
-
 
     public function tile(int $x, int $y): Tile
     {
@@ -69,6 +69,18 @@ class TilePool
     public function higestY()
     {
         return collection($this->tiles())->max('y');
+    }
+
+    public function plentyOfSpace(): bool
+    {
+        $totalCount = count($this->tiles());
+        $remaining = count($this->tiles()) - count($this->roomTiles);
+        return $remaining > ($totalCount * .5);
+    }
+
+    public function insertRoomTile($key)
+    {
+        $this->roomTiles[$key] = $this->tiles[$key];
     }
 
 }
