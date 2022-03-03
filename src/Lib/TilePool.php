@@ -18,6 +18,7 @@ class TilePool
      */
     private $tiles = [];
     private $roomTiles = [];
+    private $bufferTiles = [];
 
     public function __construct(Grid $grid)
     {
@@ -75,7 +76,7 @@ class TilePool
     {
         $totalCount = count($this->tiles());
         $remaining = count($this->tiles()) - count($this->roomTiles);
-        return $remaining > ($totalCount * .5);
+        return $remaining > ($totalCount * .6);
     }
 
     public function insertRoomTile($key)
@@ -86,6 +87,16 @@ class TilePool
     public function roomTiles()
     {
         return $this->roomTiles;
+    }
+
+    public function insertBufferTile($key)
+    {
+        $this->bufferTiles[$key] = $this->tiles[$key];
+    }
+
+    public function bufferTiles()
+    {
+        return $this->bufferTiles;
     }
 
 }

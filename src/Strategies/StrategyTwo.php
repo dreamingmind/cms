@@ -52,12 +52,14 @@ class StrategyTwo
     private function makeIsolatedRoom(TilePool $tilePool, Region $region)
     {
         $existingRoomTiles = $tilePool->roomTiles();
+        $existingBufferTiles = $tilePool->bufferTiles();
 
         do {
             $room = new Room($region);
             $inUse = collection($room->tiles())
-                ->filter(function($tile, $key) use ($existingRoomTiles) {
-                    return array_key_exists($key, $existingRoomTiles);
+                ->filter(function($tile, $key) use ($existingRoomTiles, $existingBufferTiles) {
+                    return array_key_exists($key, $existingRoomTiles)
+                        || array_key_exists($key, $existingBufferTiles);
                 })
                 ->toArray();
         } while (!empty($inUse));
