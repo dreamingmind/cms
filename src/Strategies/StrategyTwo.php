@@ -5,6 +5,7 @@ namespace App\Strategies;
 use App\GDPrimitives\Grid;
 use App\Lib\Region;
 use App\Lib\Room;
+use App\Lib\TilePool;
 
 class StrategyTwo
 {
@@ -18,15 +19,22 @@ class StrategyTwo
         $this->_canvas = $region->image();
         $grid->add($region->image());
 
-        foreach (range(0,5) as $count) {
-            $room = new Room($grid->region());
+//        foreach (range(0,5) as $count) {
+//            $room = new Room($grid->region());
+//            $colors = $this->randomColor();
+//            $room->_getRectangle('current')
+//                ->setColor('fill', implode($colors), $colors);
+//            $room->add($region->image(), $grid->getTiles());
+//        }
+        $tilePool = $grid->getTiles();
+
+        while ($tilePool->plentyOfSpace()) {
             $colors = $this->randomColor();
-            $room->_getRectangle('current')
+            $rm = $this->makeIsolatedRoom($tilePool, $grid->region());
+            $rm->_getRectangle('current')
                 ->setColor('fill', implode($colors), $colors);
-            $room->add($region->image(), $grid->getTiles());
+            $rm->add($region->image(), $grid->getTiles());
         }
-
-
     }
 
     public function output()
@@ -39,6 +47,13 @@ class StrategyTwo
     private function randomColor()
     {
         return [rand(0,255), rand(0,255), rand(0,255)];
+    }
+
+    private function makeIsolatedRoom(TilePool $tilePool, Region $region)
+    {
+        $room = new Room($region);
+        return $room;
+//        osdd($room);
     }
 
 
