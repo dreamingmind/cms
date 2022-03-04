@@ -92,7 +92,7 @@ class PointPair
     }
 
     /**
-     * @return Point[]
+     * @return Point[] lo/lo, hi/hi
      */
     public function pair(): array
     {
