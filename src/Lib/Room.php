@@ -79,7 +79,7 @@ class Room
             }
         }
         /**
-         * not proposed buffer tiles
+         * note proposed buffer tiles
          * ::add() will record them in TilePool
          */
         foreach (range($this->x_origin - 1, $this->x_origin + $this->wide + 1) as $x) {

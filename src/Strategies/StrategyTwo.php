@@ -18,23 +18,14 @@ class StrategyTwo
 
         $this->_canvas = $region->image();
         $grid->add($region->image());
-
-//        foreach (range(0,5) as $count) {
-//            $room = new Room($grid->region());
-//            $colors = $this->randomColor();
-//            $room->_getRectangle('current')
-//                ->setColor('fill', implode($colors), $colors);
-//            $room->add($region->image(), $grid->getTiles());
-//        }
         $tilePool = $grid->getTiles();
 
         while ($tilePool->plentyOfSpace()) {
-            $colors = $this->randomColor();
             $rm = $this->makeIsolatedRoom($tilePool, $grid->region());
-            $rm->_getRectangle('current')
-                ->setColor('fill', implode($colors), $colors);
             $rm->add($region->image(), $grid->getTiles());
         }
+//        (new Room($region))->add($region->image(), $grid->getTiles());
+
     }
 
     public function output()
