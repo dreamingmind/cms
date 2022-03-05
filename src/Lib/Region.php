@@ -87,4 +87,19 @@ class Region implements RegionInterface, PointPairInterface
     {
         return $this->pts;
     }
+
+    /**
+     * Set this classes color in a chainable way
+     *
+     * @param $alias
+     * @param $specs
+     * @return $this
+     */
+    public function setColor($alias, $specs): Region
+    {
+        $this->color = $this->_setColor($alias, $specs);
+        return $this;
+    }
+
+
 }

@@ -65,6 +65,7 @@ class Grid
      */
     public function add($canvas): void
     {
+        imagesetthickness($canvas,5);
         foreach (range(0, $this->region->width(Con::TILE)) as $i => $x) {
             $this->xLine($i)->add($canvas);
         }
@@ -110,6 +111,12 @@ class Grid
             $this->getY($y)
         );
         return new Line($p1, $p2, $this->_getColor('current'));
+    }
+
+    public function setColor($alias, $specs): Grid
+    {
+        $this->color = $this->_setColor($alias, $specs);
+        return $this;
     }
 
 }

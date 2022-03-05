@@ -29,7 +29,7 @@ class StrategyOne
         $t->start();
         $region = new Region($config);
         $grid = (new Grid($region))
-            ->_setColor('redish', [199, 66, 22]);
+            ->setColor('redish', [199, 66, 22]);
 
         $this->_canvas = $region->image();
         $grid->add($region->image());
@@ -71,7 +71,7 @@ class StrategyOne
         ];
 
         $subRegion = $region->newSubRegion($config)
-            ->_setColor('dark', ['grey' => 80]);
+            ->setColor('dark', ['grey' => 80]);
 
         $subGrid = new Grid(
             $subRegion,

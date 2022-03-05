@@ -14,7 +14,7 @@ class StrategyTwo
     {
         $region = new Region($config);
         $grid = (new Grid($region))
-            ->_setColor('redish', [199, 66, 22]);
+            ->setColor('redish', [199, 66, 22]);
 
         $this->_canvas = $region->image();
         $grid->add($region->image());
