@@ -2,6 +2,8 @@
 
 namespace App\GDPrimitives;
 
+use http\Exception\BadMethodCallException;
+
 class Color
 {
     protected $r = 255;
@@ -31,6 +33,24 @@ class Color
     public function allocate($image)
     {
         return imagecolorallocate($image, $this->r, $this->g, $this->b);
+    }
+
+    public function getColorValue($color = null)
+    {
+        if (is_null($color)) {
+            return [
+                'r' => $this->r,
+                'g' => $this->g,
+                'b' => $this->b,
+            ];
+        }
+        if (in_array($color, ['r', 'g', 'b'])) {
+            return $this->$color;
+        }
+        else {
+            $msg = "'r', 'g', and 'b' or null are the only valid arguments";
+            throw new BadConstructorValueException($msg);
+        }
     }
 
 }
