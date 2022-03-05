@@ -10,3 +10,4 @@
 /webroot/img/dungeon.png
 /webroot/.DS_Store
 /tests.sqlite
+/.phpunit.result.cache
