@@ -122,17 +122,4 @@ class Canvas
         return $this->image;
     }
 
-    public function add($canvas)
-    {
-        imagefilledrectangle(
-            $canvas,
-            $this->origin(Con::X),
-            $this->origin(Con::Y),
-            $this->origin(Con::X) + $this->width(Con::PIXEL),
-            $this->origin(Con::Y) + $this->height(Con::PIXEL),
-            $this->getConfig('ground_color')->allocate($canvas)
-        );
-    }
-
-
 }
