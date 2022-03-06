@@ -9,15 +9,6 @@ use App\Lib\Canvas;
 class CanvasTest extends \Cake\TestSuite\TestCase
 {
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-    }
-
     /**
      * Class will not throw errors on config-less creation
      *
@@ -122,14 +113,12 @@ class CanvasTest extends \Cake\TestSuite\TestCase
         );
 
     }
+
     public function test_imageRenders()
     {
         $canvas = new Canvas();
         $this->assertNotFalse($canvas->image());
-        $this->assertTrue(
-            $canvas->image() instanceof \GdImage
-            || is_resource($canvas->image())
-        );
+        $this->assertTrue(is_resource($canvas->image()));
     }
 
 }
