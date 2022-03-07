@@ -36,7 +36,7 @@ class Region implements RegionInterface, PointPairInterface
 
     public function __construct($config = [])
     {
-        if(is_null($this->canvas)) {
+        if(is_null($this->canvas) || is_null($this->getConfig('canvas'))) {
 //            $c = $config['canvas'];
 //            unset($config['canvas']);
             $this->canvas = new Canvas($config);
