@@ -112,6 +112,8 @@ class CanvasTest extends \Cake\TestSuite\TestCase
             $canvas->setColor('gr', ['grey' => 50])
         );
 
+        $this->assertIsArray($canvas->_getColor());
+
     }
 
     public function test_imageRenders()
