@@ -34,18 +34,18 @@ class ApplicationTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testBootstrap()
-    {
-        $app = new Application(dirname(dirname(__DIR__)) . '/config');
-        $app->bootstrap();
-        $plugins = $app->getPlugins();
+//    public function testBootstrap()
+//    {
+//        $app = new Application(dirname(dirname(__DIR__)) . '/config');
+//        $app->bootstrap();
+//        $plugins = $app->getPlugins();
 
-        $this->assertCount(4, $plugins);
-        $this->assertSame('Cake/Repl', $plugins->get('Cake/Repl')->getName());
-        $this->assertSame('Bake', $plugins->get('Bake')->getName());
-        $this->assertSame('DebugKit', $plugins->get('DebugKit')->getName());
-        $this->assertSame('Migrations', $plugins->get('Migrations')->getName());
-    }
+//        $this->assertCount(4, $plugins);
+//        $this->assertSame('Cake/Repl', $plugins->get('Cake/Repl')->getName());
+//        $this->assertSame('Bake', $plugins->get('Bake')->getName());
+//        $this->assertSame('DebugKit', $plugins->get('DebugKit')->getName());
+//        $this->assertSame('Migrations', $plugins->get('Migrations')->getName());
+//    }
 
     /**
      * testBootstrapPluginWitoutHalt
