@@ -30,12 +30,12 @@ trait ColorRegistryTrait
     }
 
     /**
-     * @param string $key
+     * @param string $alias
      * @param array $spec  ['grey' => %] or [r, g, b] (see ColorRegistry::set())
-     * @return $this
+     * @return Color
      */
-    public function _setColor(string $key, array $spec) {
-        $this->color = ColorRegistry::set($key, $spec);
-        return $this->_getColor($key);
+    public function _setColor(string $alias, array $spec) {
+        $this->color = ColorRegistry::set($alias, $spec);
+        return $this->_getColor($alias);
     }
 }
