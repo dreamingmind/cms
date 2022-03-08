@@ -36,9 +36,10 @@ class Region implements RegionInterface, PointPairInterface
 
     public function __construct($config = [])
     {
-        if(is_null($this->canvas) || is_null($this->getConfig('canvas'))) {
-//            $c = $config['canvas'];
-//            unset($config['canvas']);
+        if (($config['canvas'] ?? null) instanceof Canvas) {
+            $this->canvas = $config['canvas'];
+        }
+        if(is_null($this->canvas)) {
             $this->canvas = new Canvas($config);
         }
         $this->pts = new PointPair(
@@ -97,9 +98,13 @@ class Region implements RegionInterface, PointPairInterface
      */
     public function setColor($alias, $specs): Region
     {
-        $this->color = $this->_setColor($alias, $specs);
+        $this->color = $this->canvas()->_setColor($alias, $specs);
         return $this;
     }
 
+    public function getColor($alias = null)
+    {
+        return $this->canvas()->_getColor($alias);
+    }
 
 }
