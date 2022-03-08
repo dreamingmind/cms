@@ -7,6 +7,7 @@ use App\GDPrimitives\Color;
 use App\GDPrimitives\PointPair;
 use App\Lib\Canvas;
 use App\Lib\Region;
+use App\Lib\SubRegion;
 
 class RegionTest extends \Cake\TestSuite\TestCase
 {
@@ -130,4 +131,11 @@ class RegionTest extends \Cake\TestSuite\TestCase
         $this->assertInstanceOf(Region::class, $actual);
     }
 
+    public function test_CreateSubRegion()
+    {
+        $region = new Region();
+        $subRegion = $region->newSubRegion();
+
+        $this->assertInstanceOf(SubRegion::class, $subRegion);
+    }
 }
