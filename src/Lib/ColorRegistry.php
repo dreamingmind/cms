@@ -6,7 +6,7 @@ use App\GDPrimitives\Color;
 
 class ColorRegistry
 {
-    protected static $keys = [
+    protected static $default_colors = [
         'ground' => [193,179,131],
         'grid' => ['grey' => 50],
         'tile_fill' => ['grey' => 15],
@@ -18,42 +18,42 @@ class ColorRegistry
 
     protected static $colors = [];
 
-    public static function get($key = null)
+    public static function get($alias = null)
     {
-        if (is_null($key)) {
+        if (is_null($alias)) {
             return self::$colors;
         }
-        if (!key_exists($key, self::$colors)) {
-            self::initialize($key);
+        if (!key_exists($alias, self::$colors)) {
+            self::initialize($alias);
         }
-        return self::$colors[$key];
+        return self::$colors[$alias];
     }
 
     /**
-     * @param string $key
+     * @param string $alias
      * @param array $color ['grey' => %] or [r, g, b]
      * @return Color|void
      */
-    public static function set($key, $color = [])
+    public static function set($alias, $color = [])
     {
-        return self::make($key, $color);
+        return self::make($alias, $color);
     }
 
-    private static function initialize($key)
+    private static function initialize($alias)
     {
-        $spec_key = key_exists($key, self::$keys) ? $key : 'default';
-        $spec = self::$keys[$spec_key];
-        self::make($key, $spec);
+        $spec_key = key_exists($alias, self::$default_colors) ? $alias : 'default';
+        $spec = self::$default_colors[$spec_key];
+        self::make($alias, $spec);
     }
 
     /**
      * @param $spec
-     * @param $key
+     * @param $alias
      * @return void
      */
-    private static function make($key, $spec): Color
+    private static function make($alias, $spec): Color
     {
-        $color = new Color($key);
+        $color = new Color($alias);
         if (key_exists('grey', $spec)) {
             $color->grey($spec['grey']);
         }
@@ -61,7 +61,7 @@ class ColorRegistry
             list($r, $g, $b) = array_values($spec);
             $color->setColor($r, $g, $b);
         }
-        self::$colors[$key] = $color;
+        self::$colors[$alias] = $color;
         return $color;
     }
 
