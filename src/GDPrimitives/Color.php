@@ -2,7 +2,7 @@
 
 namespace App\GDPrimitives;
 
-use http\Exception\BadMethodCallException;
+use App\Lib\ColorRegistry;
 
 class Color
 {
@@ -11,9 +11,12 @@ class Color
     protected $b = 255;
     protected $alias = '';
 
-    public function __construct($alias = 'made manually')
+    public function __construct($alias = 'made manually', $specs = [])
     {
         $this->alias = $alias;
+        if (!empty($specs)) {
+            ColorRegistry::set($alias, $specs);
+        }
     }
 
     public function setColor($r, $g, $b): Color
