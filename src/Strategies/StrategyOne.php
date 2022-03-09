@@ -28,23 +28,23 @@ class StrategyOne
         $t = osdTime();
         $t->start();
         $region = new Region($config);
-        $grid = (new Grid($region))
+        $region->grid()
             ->setColor('redish', [199, 66, 22]);
 
         $this->_canvas = $region->image();
-        $grid->add($region->image());
+        $region->grid()->add($region->image());
 
         $this->randomBlocks(
-            $grid,
+            $region->grid(),
             new Rectangle()
         );
 
         foreach (range(0,5) as $count) {
-            $room = new Room($grid->region());
-            $room->add($region->image(), $grid->getTiles());
+            $room = new Room($region);
+            $room->add($region->image(), $region->grid()->getTiles());
         }
 
-        $this->subRegion($region, $grid);
+        $this->subRegion($region);
         $t->end();
 //        osd($t->result());
     }
@@ -56,15 +56,15 @@ class StrategyOne
         imagedestroy($this->_canvas);
     }
 
-    private function subRegion(Region $region, Grid $grid)
+    private function subRegion(Region $region)
     {
         $x = rand(0, $region->width(Con::TILE)/2);
         $y = rand(0, $region->height(Con::TILE)/2);
 
         $config = [
             'tile_size' => (int) $region->tileSize() / 2,
-            'origin_x' => (int) $grid->getX($x),
-            'origin_y' => (int) $grid->getY($y),
+            'origin_x' => (int) $region->grid()->getX($x),
+            'origin_y' => (int) $region->grid()->getY($y),
             'ground_color' => (new Color())->grey(100),
             'tiles_wide' => $region->width(Con::TILE),
             'tiles_high' => $region->height(Con::TILE),
@@ -73,14 +73,14 @@ class StrategyOne
         $subRegion = $region->newSubRegion($config)
             ->setColor('dark', ['grey' => 80]);
 
-        $subGrid = new Grid(
-            $subRegion,
-            ['grid_color' => (new Color())->setColor(0, 127, 127)]
-        );
+//        $subGrid = new Grid(
+//            $subRegion,
+//            ['grid_color' => (new Color())->setColor(0, 127, 127)]
+//        );
         $subRegion->add($region->image());
-        $subGrid->add($region->image());
+        $subRegion->grid()->add($region->image());
 
-        $this->randomBlocks($subGrid, new Rectangle());
+        $this->randomBlocks($subRegion->grid(), new Rectangle());
 
     }
 
