@@ -13,16 +13,16 @@ class StrategyTwo
     public function __construct($config)
     {
         $region = new Region($config);
-        $grid = (new Grid($region))
+        $region->grid()
             ->setColor('redish', [199, 66, 22]);
 
         $this->_canvas = $region->image();
-        $grid->add($region->image());
-        $tilePool = $grid->getTiles();
+        $region->grid()->add($region->image());
+        $tilePool = $region->grid()->getTiles();
 
         while ($tilePool->plentyOfSpace()) {
-            $rm = $this->makeIsolatedRoom($tilePool, $grid->region());
-            $rm->add($region->image(), $grid->getTiles());
+            $rm = $this->makeIsolatedRoom($tilePool, $region);
+            $rm->add($region->image(), $region->grid()->getTiles());
         }
 //        (new Room($region))->add($region->image(), $grid->getTiles());
 
