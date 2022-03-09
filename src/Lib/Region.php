@@ -4,6 +4,7 @@ namespace App\Lib;
 
 
 use App\Constants\Con;
+use App\GDPrimitives\Grid;
 use App\GDPrimitives\Point;
 use App\GDPrimitives\PointPair;
 use App\Interfaces\PointPairInterface;
@@ -39,8 +40,14 @@ class Region implements RegionInterface, PointPairInterface
         if (($config['canvas'] ?? null) instanceof Canvas) {
             $this->canvas = $config['canvas'];
         }
-        if(is_null($this->canvas)) {
+        else {
             $this->canvas = new Canvas($config);
+        }
+        if (($config['grid'] ?? null) instanceof Grid) {
+            $this->grid = $config['grid'];
+        }
+        else {
+            $this->grid = new Grid($this);
         }
         $this->pts = new PointPair(
             new Point($this->origin(Con::X), $this->origin(Con::Y)),
@@ -105,6 +112,11 @@ class Region implements RegionInterface, PointPairInterface
     public function getColor($alias = null)
     {
         return $this->canvas()->_getColor($alias);
+    }
+
+    public function grid()
+    {
+        return $this->grid;
     }
 
 }
