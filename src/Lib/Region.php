@@ -119,4 +119,10 @@ class Region implements RegionInterface, PointPairInterface
         return $this->grid;
     }
 
+    public function draw($grid = true)
+    {
+        $this->grid()->draw($this->image());
+        return $this->image();
+    }
+
 }

@@ -68,16 +68,21 @@ class SubRegion extends Region
         parent::__construct($config);
     }
 
-    public function draw($canvas)
+    public function draw($grid = true)
     {
+        $image = $this->image();
         imagefilledrectangle(
-            $canvas,
+            $image,
             $this->origin(Con::X),
             $this->origin(Con::Y),
             $this->origin(Con::X) + $this->width(Con::PIXEL),
             $this->origin(Con::Y) + $this->height(Con::PIXEL),
-            $this->getConfig('ground_color')->allocate($canvas)
+            $this->getConfig('ground_color')->allocate($image)
         );
+        if ($grid) {
+            $this->grid()->draw($image);
+        }
+        return $this->image();
     }
 
     /**
