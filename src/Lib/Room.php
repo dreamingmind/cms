@@ -92,7 +92,7 @@ class Room
         }
     }
 
-    public function add($canvas, TilePool $pool)
+    public function draw($canvas, TilePool $pool)
     {
 //        $r = new Rectangle();
         foreach ($this->tiles as $key => $value) {

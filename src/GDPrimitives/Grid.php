@@ -63,14 +63,14 @@ class Grid
      * @param Grid $grid
      * @return void
      */
-    public function add($canvas): void
+    public function draw($canvas): void
     {
         imagesetthickness($canvas,5);
         foreach (range(0, $this->region->width(Con::TILE)) as $i => $x) {
-            $this->xLine($i)->add($canvas);
+            $this->xLine($i)->draw($canvas);
         }
         foreach (range(0, $this->region->height(Con::TILE)) as $i => $y) {
-            $this->yLine($i)->add($canvas);
+            $this->yLine($i)->draw($canvas);
         }
     }
 

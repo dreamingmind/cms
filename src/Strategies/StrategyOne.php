@@ -32,7 +32,7 @@ class StrategyOne
             ->setColor('redish', [199, 66, 22]);
 
         $this->_canvas = $region->image();
-        $region->grid()->add($region->image());
+        $region->grid()->draw($region->image());
 
         $this->randomBlocks(
             $region->grid(),
@@ -41,7 +41,7 @@ class StrategyOne
 
         foreach (range(0,5) as $count) {
             $room = new Room($region);
-            $room->add($region->image(), $region->grid()->getTiles());
+            $room->draw($region->image(), $region->grid()->getTiles());
         }
 
         $this->subRegion($region);
@@ -77,8 +77,8 @@ class StrategyOne
 //            $subRegion,
 //            ['grid_color' => (new Color())->setColor(0, 127, 127)]
 //        );
-        $subRegion->add($region->image());
-        $subRegion->grid()->add($region->image());
+        $subRegion->draw($region->image());
+        $subRegion->grid()->draw($region->image());
 
         $this->randomBlocks($subRegion->grid(), new Rectangle());
 

@@ -31,7 +31,7 @@ class Line
         $this->pts = new PointPair($pt1, $pt2);
     }
 
-    public function add($canvas)
+    public function draw($canvas)
     {
         imageline(
             $canvas,

@@ -68,7 +68,7 @@ class SubRegion extends Region
         parent::__construct($config);
     }
 
-    public function add($canvas)
+    public function draw($canvas)
     {
         imagefilledrectangle(
             $canvas,

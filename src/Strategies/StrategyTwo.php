@@ -17,12 +17,12 @@ class StrategyTwo
             ->setColor('redish', [199, 66, 22]);
 
         $this->_canvas = $region->image();
-        $region->grid()->add($region->image());
+        $region->grid()->draw($region->image());
         $tilePool = $region->grid()->getTiles();
 
         while ($tilePool->plentyOfSpace()) {
             $rm = $this->makeIsolatedRoom($tilePool, $region);
-            $rm->add($region->image(), $region->grid()->getTiles());
+            $rm->draw($region->image(), $region->grid()->getTiles());
         }
 //        (new Room($region))->add($region->image(), $grid->getTiles());
 
