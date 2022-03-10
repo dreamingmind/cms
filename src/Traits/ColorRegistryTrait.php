@@ -18,15 +18,15 @@ trait ColorRegistryTrait
      * $key = 'current' : the Color or array of Colors in the current object
      * $key = string : a specific Color from the registry (will provide default)
      *
-     * @param string|null $key
+     * @param string|null $alias
      * @return Color|Color[]
      */
-    public function _getColor(string $key = null)
+    public function _getColor(string $alias = null)
     {
-        if ($key === 'current') {
+        if ($alias === 'current') {
             return $this->color;
         }
-        return ColorRegistry::get($key);
+        return ColorRegistry::get($alias);
     }
 
     /**

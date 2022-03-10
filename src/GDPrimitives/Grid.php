@@ -113,9 +113,9 @@ class Grid
         return new Line($p1, $p2, $this->_getColor('current'));
     }
 
-    public function setColor($alias, $specs): Grid
+    public function setColor(string $type, $alias): Grid
     {
-        $this->color = $this->_setColor($alias, $specs);
+        $this->color = $this->_setColor($type, $alias);
         return $this;
     }
 

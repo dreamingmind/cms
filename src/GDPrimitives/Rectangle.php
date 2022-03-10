@@ -89,17 +89,17 @@ class Rectangle
 
     /**
      * @param string $type 'fill' or 'stroke'
-     * @param string|Color $key
-     * @param $specs ['grey' => %] or [r-val, g-val, b-val]
+     * @param string|Color $alias
+     * @param array $specs ['grey' => %] or [r-val, g-val, b-val]
      * @return void
      */
-    public function setColor($type, $key, $specs = []) : Rectangle
+    public function setColor(string $type, $alias, array $specs = []) : Rectangle
     {
-        if ($key instanceof Color) {
-            $this->color[$type] = $key;
+        if ($alias instanceof Color) {
+            $this->color[$type] = $alias;
         }
         else {
-            $this->color[$type] = ColorRegistry::set($key, $specs);
+            $this->color[$type] = ColorRegistry::set($alias, $specs);
         }
         return $this/*->color[$type]*/;
     }
