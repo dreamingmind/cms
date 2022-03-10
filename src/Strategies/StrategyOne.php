@@ -31,8 +31,8 @@ class StrategyOne
         $region->grid()
             ->setColor('redish', [199, 66, 22]);
 
-        $this->_canvas = $region->image();
-        $region->grid()->draw($region->image());
+        $this->_canvas = $region->draw();
+//        $region->grid()->draw($region->image());
 
         $this->randomBlocks(
             $region->grid(),
@@ -73,12 +73,7 @@ class StrategyOne
         $subRegion = $region->newSubRegion($config)
             ->setColor('dark', ['grey' => 80]);
 
-//        $subGrid = new Grid(
-//            $subRegion,
-//            ['grid_color' => (new Color())->setColor(0, 127, 127)]
-//        );
-        $subRegion->draw($region->image());
-        $subRegion->grid()->draw($region->image());
+        $subRegion->draw();
 
         $this->randomBlocks($subRegion->grid(), new Rectangle());
 

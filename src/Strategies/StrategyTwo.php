@@ -16,8 +16,7 @@ class StrategyTwo
         $region->grid()
             ->setColor('redish', [199, 66, 22]);
 
-        $this->_canvas = $region->image();
-        $region->grid()->draw($region->image());
+        $this->_canvas = $region->draw();
         $tilePool = $region->grid()->getTiles();
 
         while ($tilePool->plentyOfSpace()) {
