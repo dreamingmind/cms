@@ -2,6 +2,7 @@
 
 namespace App\GDPrimitives;
 
+use App\Exceptions\BadConstructorValueException;
 use App\Lib\ColorRegistry;
 
 class Color
@@ -38,7 +39,7 @@ class Color
         return imagecolorallocate($image, $this->r, $this->g, $this->b);
     }
 
-    public function getColorValue($color = null)
+    public function getColorValue($color = null): array
     {
         if (is_null($color)) {
             return [
@@ -54,6 +55,11 @@ class Color
             $msg = "'r', 'g', and 'b' or null are the only valid arguments";
             throw new BadConstructorValueException($msg);
         }
+    }
+
+    public function alias()
+    {
+        return $this->alias;
     }
 
 }
