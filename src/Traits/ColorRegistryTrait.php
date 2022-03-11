@@ -43,7 +43,7 @@ trait ColorRegistryTrait
         $this->verifyColorProperty();
 
         if (is_string($type)) {
-            return $this->color ?? null;
+            return $this->color[$type] ?? null;
         }
         return $this->color;
     }
