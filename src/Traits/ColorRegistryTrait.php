@@ -102,7 +102,7 @@ trait ColorRegistryTrait
      */
     private function verifyColorProperty(): void
     {
-        if (!is_array($this->color)) {
+        if (!is_array($this->color ?? null)) {
             $msg = 'Users of ColorRegistryTrait must define the property $color = []';
             throw new MissingClassPropertyException($msg);
         }
