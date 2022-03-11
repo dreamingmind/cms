@@ -84,6 +84,7 @@ class ColorRegistryTraitTest extends TestCase
     }
     //</editor-fold> (
 
+    //<editor-fold desc="Tests for Registry::_setColor functionality (set registry content)">
     public function test__setColorMakesNewRegistryEntry()
     {
         $class = new UserOfColorTrait();
@@ -100,11 +101,14 @@ class ColorRegistryTraitTest extends TestCase
 
         $this->assertEmpty($class->getColor());
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Tests for local::setColor functionality (set local class property)">
     public function test_setColorIsChainable()
     {
         $class = (new UserOfColorTrait())
-            ->setColor('fill', 'black', [0,0,0]);
+            ->setColor('fill', 'black', [0,0,0])
+            ->setColor('stroke', 'black', [0,0,0]);
 
         $this->assertInstanceOf(UserOfColorTrait::class, $class);
     }
@@ -133,17 +137,27 @@ class ColorRegistryTraitTest extends TestCase
     public function test_setColorFromARegisteredColor()
     {
         $class = new UserOfColorTrait();
-        debug($class);
         $this->makeBlackAndWhite($class);
-        debug($class);
         $class
             ->setColor('fill', 'white')
-            /*->setColor('stroke', 'black')*/;
+            ->setColor('stroke', 'black');
 
         $this->assertCount(2, $class->_getColor());
         $this->assertCount(2, $class->getColor());
     }
 
+    public function test_setColorFromSpecsIsStored()
+    {
+        $class = (new UserOfColorTrait())
+            ->setColor('fill', 'green', [0,255,0])
+            ->setColor('stroke', 'fifty', ['grey' => 50]);
+
+        $this->assertEquals('green', $class->getColor('fill')->alias());
+        $this->assertEquals('fifty', $class->getColor('stroke')->alias());
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Utilities to generate colors">
     private function makeBlackAndWhite(UserOfColorTrait $class)
     {
         $class->_setColor('black', [0,0,0]);
@@ -159,6 +173,7 @@ class ColorRegistryTraitTest extends TestCase
     {
         $class->setColor('stroke', 'black', [0,0,0]);
     }
+    //</editor-fold>
 }
 
 class BadUserOfColorTrait
