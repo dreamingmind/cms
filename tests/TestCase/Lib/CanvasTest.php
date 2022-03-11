@@ -94,28 +94,6 @@ class CanvasTest extends \Cake\TestSuite\TestCase
         $this->assertEquals(101, $canvas->height(Con::PIXEL));
     }
 
-    public function test_ColorRegistryIntegration()
-    {
-        $canvas = new Canvas();
-        $colors = $canvas->_getColor('current')->getColorValue();
-        $canvas->setColor('ground_color', [7,7,7]);
-        $newColors = $canvas->_getColor('current')->getColorValue();
-
-        $this->assertNotEquals($colors, $newColors);
-        $this->assertEquals(
-            ['r' => 7, 'g' => 7, 'b' => 7],
-            $newColors
-        );
-        //local setter is chainable
-        $this->assertInstanceOf(
-            Canvas::class,
-            $canvas->setColor('gr', ['grey' => 50])
-        );
-
-        $this->assertIsArray($canvas->_getColor());
-
-    }
-
     public function test_imageRenders()
     {
         $canvas = new Canvas();
