@@ -2,6 +2,7 @@
 
 namespace App\Test\TestCase\Traits;
 
+use App\Exceptions\MissingClassPropertyException;
 use App\GDPrimitives\Color;
 use App\Lib\ColorRegistry;
 use App\Traits\ColorRegistryTrait;
@@ -57,7 +58,29 @@ class ColorRegistryTraitTest extends TestCase
         $class = new UserOfColorTrait();
 
         $this->assertEmpty($class->getColor());
-        $this->assertNull($class->getColor('white'));
+        $this->assertNull($class->getColor('fill'));
+    }
+
+    public function test_getColorWhenOneDefined()
+    {
+        $class = new UserOfColorTrait();
+        $this->makeBlackStrokeColor($class);
+        $this->makeWhiteFillColor($class);
+
+        $this->assertCount(2, $class->getColor());
+        $strokeColor = $class->getColor('stroke');
+        $this->assertInstanceOf(Color::class, $strokeColor);
+        $this->assertEquals('black', $strokeColor->alias());
+        //saved in registry too
+        $this->assertCount(2, $class->_getColor());
+    }
+
+    public function test_getColorDetectsMissingProperty()
+    {
+        $class = new BadUserOfColorTrait();
+
+        $this->expectException(MissingClassPropertyException::class);
+        $class->getColor();
     }
 
     private function makeBlackAndWhite($class)
