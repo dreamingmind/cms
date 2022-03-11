@@ -78,10 +78,10 @@ trait ColorRegistryTrait
      * @param string $type the name of the local color, typically 'fill' or 'stroke'
      * @param Color|string $alias Color or alias of registry entry
      * @param array $specs specs or empty for existing color (see set())
-     * @return object the class using this trait (makes the chainable)
+     * @return self the class using this trait (makes the chainable)
      * @throws MissingClassPropertyException
      */
-    public function setColor(string $type, $alias, array $specs = []) : object
+    public function setColor(string $type, $alias, array $specs = []) : self
     {
         $this->verifyColorProperty();
 
