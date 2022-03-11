@@ -65,4 +65,9 @@ class ColorRegistry
         return $color;
     }
 
+    public static function reset()
+    {
+        self::$colors = [];
+    }
+
 }
