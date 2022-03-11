@@ -11,7 +11,7 @@ class Room
 
     use RectangleRegistryTrait;
 
-    private $max = 10;
+    private $max = 5;
     private $min = 3;
     private $tiles = [];
     private $bufferTiles = [];

@@ -76,7 +76,7 @@ class TilePool
     {
         $totalCount = count($this->tiles());
         $remaining = count($this->tiles()) - count($this->roomTiles);
-        return $remaining > ($totalCount * .6);
+        return $remaining > ($totalCount * .7);
     }
 
     public function insertRoomTile($key)

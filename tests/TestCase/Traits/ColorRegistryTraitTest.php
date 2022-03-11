@@ -19,7 +19,7 @@ class ColorRegistryTraitTest extends TestCase
         ColorRegistry::reset();
     }
 
-    //<editor-fold desc="Tests for Registry::_getColor() functionality">
+    //<editor-fold desc="Tests for Registry::_getColor() functionality (inspect registry content)">
 
     public function test__getColorReturnsFullRegistrySet()
     {
@@ -53,6 +53,7 @@ class ColorRegistryTraitTest extends TestCase
     }
     //</editor-fold>
 
+    //<editor-fold desc="Tests for local::getColor() functionality (inspect class property)">
     public function test_getColorWhenNoneDefined()
     {
         $class = new UserOfColorTrait();
@@ -81,6 +82,14 @@ class ColorRegistryTraitTest extends TestCase
 
         $this->expectException(MissingClassPropertyException::class);
         $class->getColor();
+    }
+    //</editor-fold> (
+
+    public function test__setColorWithEmptySpecs()
+    {
+        $class = new UserOfColorTrait();
+        debug($class->_setColor('rando', []));
+
     }
 
     private function makeBlackAndWhite($class)
