@@ -34,6 +34,7 @@ class Region implements RegionInterface, PointPairInterface
      */
     private $pts;
     private $rectangle;
+    protected $color = [];
 
     public function __construct($config = [])
     {
