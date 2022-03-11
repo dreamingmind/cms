@@ -57,7 +57,7 @@ trait ColorRegistryTrait
      */
     public function _setColor(string $alias, array $spec): Color
     {
-        $this->color = ColorRegistry::set($alias, $spec);
+        ColorRegistry::set($alias, $spec);
         return $this->_getColor($alias);
     }
 
