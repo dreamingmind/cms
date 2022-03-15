@@ -12,6 +12,8 @@ use App\Lib\ColorRegistry;
 trait ColorRegistryTrait
 {
 
+    protected $color = [];
+
     /**
      * Get a Color object or some set of them from the ColorRegistry
      *
@@ -40,8 +42,6 @@ trait ColorRegistryTrait
      */
     public function getColor(string $type = null)
     {
-        $this->verifyColorProperty();
-
         if (is_string($type)) {
             return $this->color[$type] ?? null;
         }
@@ -83,8 +83,6 @@ trait ColorRegistryTrait
      */
     public function setColor(string $type, $alias, array $specs = []) : self
     {
-        $this->verifyColorProperty();
-
         if ($alias instanceof Color) {
             $this->color[$type] = $alias;
         }
@@ -97,14 +95,4 @@ trait ColorRegistryTrait
         return $this;
     }
 
-    /**
-     * @throws MissingClassPropertyException
-     */
-    private function verifyColorProperty(): void
-    {
-        if (!is_array($this->color ?? null)) {
-            $msg = 'Users of ColorRegistryTrait must define the property $color = []';
-            throw new MissingClassPropertyException($msg);
-        }
-    }
 }
