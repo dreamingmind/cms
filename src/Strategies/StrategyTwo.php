@@ -12,9 +12,8 @@ class StrategyTwo
 
     public function __construct($config)
     {
-        $region = new Region($config);
-        $region->grid()
-            ->setColor('redish', [199, 66, 22]);
+        $region = (new Region($config))
+            ->setColor('stroke', 'redish', [199, 66, 22]);
 
         $this->_canvas = $region->draw();
         $tilePool = $region->grid()->getTiles();

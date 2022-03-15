@@ -28,11 +28,11 @@ class StrategyOne
         $t = osdTime();
         $t->start();
         $region = new Region($config);
-        $region->grid()
-            ->setColor('redish', [199, 66, 22]);
+        $region
+            ->setColor('fill', 'ground_color', ['grey' => 15])
+            ->setColor('stroke', 'redish', [199, 66, 22]);
 
         $this->_canvas = $region->draw();
-//        $region->grid()->draw($region->image());
 
         $this->randomBlocks(
             $region->grid(),
@@ -46,7 +46,6 @@ class StrategyOne
 
         $this->subRegion($region);
         $t->end();
-//        osd($t->result());
     }
 
     public function output()
@@ -71,7 +70,7 @@ class StrategyOne
         ];
 
         $subRegion = $region->newSubRegion($config)
-            ->setColor('dark', ['grey' => 80]);
+            ->setColor('fill', 'dark', ['grey' => 80]);
 
         $subRegion->draw();
 
