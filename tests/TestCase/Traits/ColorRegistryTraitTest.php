@@ -60,28 +60,6 @@ class ColorRegistryTraitTest extends TestCase
         $this->assertEmpty($class->getColor());
         $this->assertNull($class->getColor('fill'));
     }
-
-    public function test_getColorWhenOneDefined()
-    {
-        $class = new UserOfColorTrait();
-        $this->makeBlackStrokeColor($class);
-        $this->makeWhiteFillColor($class);
-
-        $this->assertCount(2, $class->getColor());
-        $strokeColor = $class->getColor('stroke');
-        $this->assertInstanceOf(Color::class, $strokeColor);
-        $this->assertEquals('black', $strokeColor->alias());
-        //saved in registry too
-        $this->assertCount(2, $class->_getColor());
-    }
-
-    public function test_getColorDetectsMissingProperty()
-    {
-        $class = new BadUserOfColorTrait();
-
-        $this->expectException(MissingClassPropertyException::class);
-        $class->getColor();
-    }
     //</editor-fold> (
 
     //<editor-fold desc="Tests for Registry::_setColor functionality (set registry content)">
@@ -176,14 +154,8 @@ class ColorRegistryTraitTest extends TestCase
     //</editor-fold>
 }
 
-class BadUserOfColorTrait
-{
-    use ColorRegistryTrait;
-    //missing required property
-}
-
 class UserOfColorTrait
 {
     use ColorRegistryTrait;
-    protected $color = [];
+//    protected $color = [];
 }
