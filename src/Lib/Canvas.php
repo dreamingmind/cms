@@ -55,10 +55,15 @@ class Canvas
      * @var false|\GdImage|resource
      */
     private $image;
+    /**
+     * @var ?Color
+     */
+    protected $fill;
 
     public function __construct($config = [])
     {
         $this->config = array_merge($this->defaultConfig, $config);
+        $this->fill = ColorRegistry::get('ground');
     }
 
     /**
@@ -103,7 +108,6 @@ class Canvas
     public function image()
     {
         if (is_null($this->image)) {
-            $color = ColorRegistry::get('ground_color');
 
             $this->image = imagecreatetruecolor(
                 $this->width(Con::PIXEL),
@@ -113,10 +117,15 @@ class Canvas
                 $this->image,
                 $this->origin(Con::X),
                 $this->origin(Con::Y),
-                $color->allocate($this->image)
+                $this->fill->allocate($this->image)
             );
         }
         return $this->image;
+    }
+
+    public function setFill(Color $fill)
+    {
+        $this->fill = $fill;
     }
 
 }
