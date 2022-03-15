@@ -18,11 +18,6 @@ class Grid
     ];
 
     /**
-     * @var Color|null
-     */
-    protected $color = null;
-
-    /**
      * @var array
      */
     protected $config;
@@ -37,7 +32,6 @@ class Grid
     {
         $this->region = $region;
         $this->config = array_merge($this->defaultConfig, $config);
-        $this->color = $this->getConfig('grid_color', $this->_getColor('grid'));
     }
 
     /**
@@ -97,7 +91,7 @@ class Grid
             $this->getX($x),
             $this->getY($this->region->height(Con::TILE))
         );
-        return new Line($p1, $p2, $this->_getColor('current'));
+        return new Line($p1, $p2, $this->getColor('stroke'));
     }
 
     private function yLine($y)
@@ -110,13 +104,7 @@ class Grid
             $this->getX($this->region->width(Con::TILE)),
             $this->getY($y)
         );
-        return new Line($p1, $p2, $this->_getColor('current'));
-    }
-
-    public function setColor(string $type, $alias): Grid
-    {
-        $this->color = $this->_setColor($type, $alias);
-        return $this;
+        return new Line($p1, $p2, $this->getColor('stroke'));
     }
 
 }

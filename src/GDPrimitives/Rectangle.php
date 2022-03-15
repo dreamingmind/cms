@@ -11,15 +11,11 @@ class Rectangle
 
     use ColorRegistryTrait;
 
-    /**
-     * @var Color[]
-     */
-    private $color = [];
 
     public function __construct()
     {
-        $this->color['stroke'] = ColorRegistry::get('stroke');
-        $this->color['fill'] = ColorRegistry::get('fill');
+        $this->setColor('stroke', 'stroke');
+        $this->setColor('fill', 'stroke');
     }
 
     /**
@@ -73,35 +69,6 @@ class Rectangle
             $p2->y() - $count,
             $this->getColor('stroke')->allocate($canvas)
         );
-    }
-
-    /**
-     * @param string $type 'stroke' or 'fill'
-     * @return Color|array
-     */
-    public function getColor($type)
-    {
-        if (in_array($type, ['stroke', 'fill'])) {
-            return $this->color[$type];
-        }
-        return $this->_getColor($type);
-    }
-
-    /**
-     * @param string $type 'fill' or 'stroke'
-     * @param string|Color $alias
-     * @param array $specs ['grey' => %] or [r-val, g-val, b-val]
-     * @return void
-     */
-    public function setColor(string $type, $alias, array $specs = []) : Rectangle
-    {
-        if ($alias instanceof Color) {
-            $this->color[$type] = $alias;
-        }
-        else {
-            $this->color[$type] = ColorRegistry::set($alias, $specs);
-        }
-        return $this/*->color[$type]*/;
     }
 
 }

@@ -97,24 +97,6 @@ class Region implements RegionInterface, PointPairInterface
         return $this->pts;
     }
 
-    /**
-     * Set this classes color in a chainable way
-     *
-     * @param string $type
-     * @param $alias
-     * @return $this
-     */
-    public function setColor(string $type, $alias): Region
-    {
-        $this->color = $this->canvas()->_setColor($type, $alias);
-        return $this;
-    }
-
-    public function getColor($alias = null)
-    {
-        return $this->canvas()->_getColor($alias);
-    }
-
     public function grid()
     {
         return $this->grid;

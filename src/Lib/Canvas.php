@@ -33,7 +33,7 @@ use App\Traits\TileSizeTrait;
 class Canvas
 {
     use ConfigTrait;
-    use ColorRegistryTrait;
+//    use ColorRegistryTrait;
     use TileSizeTrait;
 
     /**
@@ -52,10 +52,6 @@ class Canvas
      */
     public $config = [];
     /**
-     * @var Color $color
-     */
-    protected $color;
-    /**
      * @var false|\GdImage|resource
      */
     private $image;
@@ -63,7 +59,6 @@ class Canvas
     public function __construct($config = [])
     {
         $this->config = array_merge($this->defaultConfig, $config);
-        $this->color = $this->getConfig('ground_color', $this->_getColor('ground'));
     }
 
     /**
@@ -108,6 +103,8 @@ class Canvas
     public function image()
     {
         if (is_null($this->image)) {
+            $color = ColorRegistry::get('ground_color');
+
             $this->image = imagecreatetruecolor(
                 $this->width(Con::PIXEL),
                 $this->height(Con::PIXEL)
@@ -116,7 +113,7 @@ class Canvas
                 $this->image,
                 $this->origin(Con::X),
                 $this->origin(Con::Y),
-                $this->_getColor('current')->allocate($this->image)
+                $color->allocate($this->image)
             );
         }
         return $this->image;
