@@ -3,6 +3,7 @@
 namespace App\GDPrimitives;
 
 use App\Constants\Con;
+use App\Lib\ColorRegistry;
 use App\Traits\ColorRegistryTrait;
 use App\Traits\ConfigTrait;
 use App\Lib\Region;
@@ -27,11 +28,16 @@ class Grid
      */
     protected $region;
     protected $tiles;
+    /**
+     * @var ?Color
+     */
+    protected $stroke;
 
     public function __construct(Region $region, $config = [])
     {
         $this->region = $region;
         $this->config = array_merge($this->defaultConfig, $config);
+//        $this->stroke = ColorRegistry::get('grid');
     }
 
     /**
@@ -59,7 +65,7 @@ class Grid
      */
     public function draw($canvas): void
     {
-        imagesetthickness($canvas,5);
+        imagesetthickness($canvas,1);
         foreach (range(0, $this->region->width(Con::TILE)) as $i => $x) {
             $this->xLine($i)->draw($canvas);
         }
@@ -91,7 +97,7 @@ class Grid
             $this->getX($x),
             $this->getY($this->region->height(Con::TILE))
         );
-        return new Line($p1, $p2, $this->getColor('stroke'));
+        return new Line($p1, $p2, $this->stroke);
     }
 
     private function yLine($y)
@@ -104,7 +110,11 @@ class Grid
             $this->getX($this->region->width(Con::TILE)),
             $this->getY($y)
         );
-        return new Line($p1, $p2, $this->getColor('stroke'));
+        return new Line($p1, $p2, $this->stroke);
     }
 
+    public function setStroke(Color $stroke)
+    {
+        $this->stroke = $stroke;
+    }
 }
