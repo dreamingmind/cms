@@ -12,6 +12,7 @@ use App\Interfaces\RegionInterface;
 use App\Traits\ColorRegistryTrait;
 use App\Traits\ConfigTrait;
 use App\Traits\RectangleRegistryTrait;
+use Cake\Event\EventManager;
 
 /**
  * Region class defines a rectangular area of operation
@@ -54,6 +55,18 @@ class Region implements RegionInterface, PointPairInterface
             new Point($this->origin(Con::X), $this->origin(Con::Y)),
             new Point($this->width(Con::PIXEL), $this->height(Con::PIXEL))
         );
+        EventManager::instance()->on('ColorRegistry.afterSetColor', [$this, 'afterSetColor']);
+    }
+
+    public function afterSetColor($event, ...$args)
+    {
+        list($type, $alias, $specs) = $args;
+        if ($type === 'fill') {
+            $this->canvas()->setFill($this->color['fill']);
+        }
+        if ($type === 'stroke') {
+            $this->grid()->setStroke($this->color['stroke']);
+        }
     }
 
     public function canvas(): Canvas
