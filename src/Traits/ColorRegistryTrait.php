@@ -5,6 +5,8 @@ namespace App\Traits;
 use App\Exceptions\MissingClassPropertyException;
 use App\GDPrimitives\Color;
 use App\Lib\ColorRegistry;
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 
 /**
  * @property Color $color
@@ -92,6 +94,10 @@ trait ColorRegistryTrait
         else {
             $this->color[$type] = ColorRegistry::set($alias, $specs);
         }
+
+        $event = new Event('ColorRegistry.afterSetColor', $this, [$type, $alias, $specs]);
+        EventManager::instance()->dispatch($event);
+
         return $this;
     }
 
