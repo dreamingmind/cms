@@ -6,6 +6,7 @@ use App\GDPrimitives\Color;
 
 class ColorRegistry
 {
+
     protected static $default_colors = [
         'ground' => [193,179,131],
         'grid' => ['grey' => 50],
@@ -15,7 +16,6 @@ class ColorRegistry
         'stroke' => ['grey' => 50],
         'default' => ['255', 0, 0]
     ];
-
     protected static $colors = [];
 
     public static function get($alias = null)
@@ -37,6 +37,11 @@ class ColorRegistry
     public static function set($alias, $color = [])
     {
         return self::make($alias, $color);
+    }
+
+    public static function reset()
+    {
+        self::$colors = [];
     }
 
     private static function initialize($alias)
@@ -63,11 +68,6 @@ class ColorRegistry
         }
         self::$colors[$alias] = $color;
         return $color;
-    }
-
-    public static function reset()
-    {
-        self::$colors = [];
     }
 
 }

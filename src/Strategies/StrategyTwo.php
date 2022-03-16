@@ -45,6 +45,8 @@ class StrategyTwo
 
         do {
             $room = new Room($region);
+            $room->_getRectangle('room')
+                ->setColor('fill', 'rand', $this->randomColor());
             $inUse = collection($room->tiles())
                 ->filter(function($tile, $key) use ($existingRoomTiles, $existingBufferTiles) {
                     return array_key_exists($key, $existingRoomTiles)

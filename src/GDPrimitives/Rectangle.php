@@ -15,7 +15,7 @@ class Rectangle
     public function __construct()
     {
         $this->setColor('stroke', 'stroke');
-        $this->setColor('fill', 'stroke');
+        $this->setColor('fill', 'fill');
     }
 
     /**

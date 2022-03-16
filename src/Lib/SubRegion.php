@@ -4,7 +4,6 @@ namespace App\Lib;
 
 use App\Constants\Con;
 use App\Exceptions\BadConstructorValueException;
-use App\GDPrimitives\Color;
 use App\Traits\TileSizeTrait;
 
 /**

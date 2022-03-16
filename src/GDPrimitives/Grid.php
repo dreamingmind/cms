@@ -4,7 +4,6 @@ namespace App\GDPrimitives;
 
 use App\Constants\Con;
 use App\Lib\ColorRegistry;
-use App\Traits\ColorRegistryTrait;
 use App\Traits\ConfigTrait;
 use App\Lib\Region;
 use App\Lib\TilePool;
@@ -16,12 +15,10 @@ class Grid
 
     protected $defaultConfig = [
     ];
-
     /**
      * @var array
      */
     protected $config;
-
     /**
      * @var Region
      */
@@ -36,7 +33,7 @@ class Grid
     {
         $this->region = $region;
         $this->config = array_merge($this->defaultConfig, $config);
-//        $this->stroke = ColorRegistry::get('grid');
+        $this->stroke_color = ColorRegistry::get('grid');
     }
 
     /**
@@ -116,4 +113,10 @@ class Grid
     {
         $this->stroke_color = $stroke_color;
     }
+
+    public function getColor() : Color
+    {
+        return $this->stroke_color;
+    }
+
 }

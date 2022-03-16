@@ -4,7 +4,6 @@ namespace App\Lib;
 
 use App\Constants\Con;
 use App\GDPrimitives\Color;
-use App\Traits\ColorRegistryTrait;
 use App\Traits\ConfigTrait;
 use App\Traits\TileSizeTrait;
 
@@ -33,7 +32,6 @@ use App\Traits\TileSizeTrait;
 class Canvas
 {
     use ConfigTrait;
-//    use ColorRegistryTrait;
     use TileSizeTrait;
 
     /**
@@ -126,6 +124,11 @@ class Canvas
     public function setColor(Color $fill_color)
     {
         $this->fill_color = $fill_color;
+    }
+
+    public function getColor()
+    {
+        return $this->fill_color;
     }
 
 }
