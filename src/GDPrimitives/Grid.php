@@ -13,7 +13,6 @@ class Grid
 {
 
     use ConfigTrait;
-    use ColorRegistryTrait;
 
     protected $defaultConfig = [
     ];
