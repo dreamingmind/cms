@@ -7,6 +7,7 @@ use App\GDPrimitives\Color;
 use App\GDPrimitives\Grid;
 use App\GDPrimitives\Rectangle;
 use App\GDPrimitives\Tile;
+use App\Lib\ColorRegistry;
 use App\Traits\ColorRegistryTrait;
 use App\Lib\Region;
 use App\Lib\Room;
@@ -28,7 +29,7 @@ class StrategyOne
         $t = osdTime();
         $t->start();
         $region = (new Region($config))
-            ->setColor('fill', 'ground', ['grey' => 10])
+            ->setColor('fill', 'fp', ['grey' => 20])
             ->setColor('stroke', 'redish', [199, 66, 22]);
 
         $this->_canvas = $region->draw();
