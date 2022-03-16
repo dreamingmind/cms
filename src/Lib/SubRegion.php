@@ -71,7 +71,7 @@ class SubRegion extends Region
             $this->origin(Con::Y),
             $this->origin(Con::X) + $this->width(Con::PIXEL),
             $this->origin(Con::Y) + $this->height(Con::PIXEL),
-            $this->getConfig('ground_color')->allocate($image)
+            $this->getColor('fill')->allocate($image)
         );
         if ($grid) {
             $this->grid()->draw($image);
