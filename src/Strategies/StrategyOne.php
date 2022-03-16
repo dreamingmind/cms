@@ -28,7 +28,7 @@ class StrategyOne
         $t = osdTime();
         $t->start();
         $region = (new Region($config))
-            ->setColor('fill', 'ground_color', ['grey' => 10])
+            ->setColor('fill', 'ground', ['grey' => 10])
             ->setColor('stroke', 'redish', [199, 66, 22]);
 
         $this->_canvas = $region->draw();
@@ -69,7 +69,8 @@ class StrategyOne
         ];
 
         $subRegion = $region->newSubRegion($config)
-            ->setColor('fill', 'dark', ['grey' => 80]);
+            ->setColor('fill', 'dark', ['grey' => 80])
+            ->setColor('stroke', 'white', ['grey' => 0]);
 
         $subRegion->draw();
 
