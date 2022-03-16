@@ -6,6 +6,8 @@ use App\Exceptions\MissingClassPropertyException;
 use App\GDPrimitives\Color;
 use App\Lib\ColorRegistry;
 use App\Traits\ColorRegistryTrait;
+use Cake\Event\EventList;
+use Cake\Event\EventManager;
 use Cake\TestSuite\TestCase;
 
 class ColorRegistryTraitTest extends TestCase
@@ -17,6 +19,10 @@ class ColorRegistryTraitTest extends TestCase
     public function setUp() : void
     {
         ColorRegistry::reset();
+        $m = EventManager::instance();
+        debug($m->matchingListeners('.'));
+        EventManager::instance()
+            ->off('ColorRegistry.afterSetColor');
     }
 
     //<editor-fold desc="Tests for Registry::_getColor() functionality (inspect registry content)">
@@ -84,6 +90,7 @@ class ColorRegistryTraitTest extends TestCase
     //<editor-fold desc="Tests for local::setColor functionality (set local class property)">
     public function test_setColorIsChainable()
     {
+//        debug(EventManager::instance()/*->off('ColorRegistry.afterSetColor')*/);die;
         $class = (new UserOfColorTrait())
             ->setColor('fill', 'black', [0,0,0])
             ->setColor('stroke', 'black', [0,0,0]);
@@ -157,5 +164,4 @@ class ColorRegistryTraitTest extends TestCase
 class UserOfColorTrait
 {
     use ColorRegistryTrait;
-//    protected $color = [];
 }

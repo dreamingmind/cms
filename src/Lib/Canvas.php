@@ -58,12 +58,12 @@ class Canvas
     /**
      * @var ?Color
      */
-    protected $fill;
+    protected $fill_color;
 
     public function __construct($config = [])
     {
         $this->config = array_merge($this->defaultConfig, $config);
-        $this->fill = ColorRegistry::get('ground');
+        $this->fill_color = ColorRegistry::get('ground');
     }
 
     /**
@@ -117,15 +117,15 @@ class Canvas
                 $this->image,
                 $this->origin(Con::X),
                 $this->origin(Con::Y),
-                $this->fill->allocate($this->image)
+                $this->fill_color->allocate($this->image)
             );
         }
         return $this->image;
     }
 
-    public function setFill(Color $fill)
+    public function setColor(Color $fill_color)
     {
-        $this->fill = $fill;
+        $this->fill_color = $fill_color;
     }
 
 }

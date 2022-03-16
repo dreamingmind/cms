@@ -31,7 +31,7 @@ class Grid
     /**
      * @var ?Color
      */
-    protected $stroke;
+    protected $stroke_color;
 
     public function __construct(Region $region, $config = [])
     {
@@ -97,7 +97,7 @@ class Grid
             $this->getX($x),
             $this->getY($this->region->height(Con::TILE))
         );
-        return new Line($p1, $p2, $this->stroke);
+        return new Line($p1, $p2, $this->stroke_color);
     }
 
     private function yLine($y)
@@ -110,11 +110,11 @@ class Grid
             $this->getX($this->region->width(Con::TILE)),
             $this->getY($y)
         );
-        return new Line($p1, $p2, $this->stroke);
+        return new Line($p1, $p2, $this->stroke_color);
     }
 
-    public function setStroke(Color $stroke)
+    public function setColor(Color $stroke_color)
     {
-        $this->stroke = $stroke;
+        $this->stroke_color = $stroke_color;
     }
 }

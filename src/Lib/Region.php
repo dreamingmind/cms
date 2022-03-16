@@ -61,12 +61,13 @@ class Region implements RegionInterface, PointPairInterface
     public function afterSetColor($event, ...$args)
     {
         list($type, $alias, $specs) = $args;
-        if ($type === 'fill') {
-            $this->canvas()->setFill($this->color['fill']);
-        }
-        if ($type === 'stroke') {
-            $this->grid()->setStroke($this->color['stroke']);
-        }
+
+        $target = $type === 'fill'
+            ? $target = $this->canvas() //fill
+            : $target = $this->grid(); //stroke
+
+        debug($this->color);
+        $target->setColor($this->color[$type]);
     }
 
     public function canvas(): Canvas
