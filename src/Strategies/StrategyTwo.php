@@ -2,7 +2,6 @@
 
 namespace App\Strategies;
 
-use App\GDPrimitives\Grid;
 use App\Lib\Region;
 use App\Lib\Room;
 use App\Lib\TilePool;
