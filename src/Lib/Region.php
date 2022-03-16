@@ -66,7 +66,6 @@ class Region implements RegionInterface, PointPairInterface
             ? $target = $this->canvas() //fill
             : $target = $this->grid(); //stroke
 
-        debug($this->color);
         $target->setColor($this->color[$type]);
     }
 

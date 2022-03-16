@@ -2,12 +2,9 @@
 
 namespace App\Test\TestCase\Traits;
 
-use App\Exceptions\MissingClassPropertyException;
 use App\GDPrimitives\Color;
 use App\Lib\ColorRegistry;
 use App\Traits\ColorRegistryTrait;
-use Cake\Event\EventList;
-use Cake\Event\EventManager;
 use Cake\TestSuite\TestCase;
 
 class ColorRegistryTraitTest extends TestCase
@@ -19,10 +16,6 @@ class ColorRegistryTraitTest extends TestCase
     public function setUp() : void
     {
         ColorRegistry::reset();
-        $m = EventManager::instance();
-        debug($m->matchingListeners('.'));
-        EventManager::instance()
-            ->off('ColorRegistry.afterSetColor');
     }
 
     //<editor-fold desc="Tests for Registry::_getColor() functionality (inspect registry content)">

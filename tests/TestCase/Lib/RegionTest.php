@@ -7,10 +7,19 @@ use App\GDPrimitives\PointPair;
 use App\Lib\Region;
 use App\Lib\SubRegion;
 use App\Traits\ColorRegistryTrait;
+use Cake\Event\EventManager;
 use Cake\Test\TestCase;
 
 class RegionTest extends \Cake\TestSuite\TestCase
 {
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        EventManager::instance()
+            ->off('ColorRegistry.afterSetColor');
+
+    }
 
     public function test_CreateSubRegion()
     {
