@@ -56,6 +56,8 @@ class Region implements RegionInterface, PointPairInterface
             new Point($this->width(Con::PIXEL), $this->height(Con::PIXEL))
         );
         EventManager::instance()->on('ColorRegistry.afterSetColor', [$this, 'afterSetColor']);
+        $this->setColor('fill', 'ground');
+        $this->setColor('stroke', 'grid');
     }
 
     public function afterSetColor($event, ...$args)
