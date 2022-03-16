@@ -4,6 +4,7 @@ namespace App\Lib;
 
 use App\Constants\Con;
 use App\GDPrimitives\Color;
+use App\Interfaces\RegionInterface;
 use App\Traits\ConfigTrait;
 use App\Traits\TileSizeTrait;
 
@@ -29,7 +30,7 @@ use App\Traits\TileSizeTrait;
  * as the unit of rendering. All the crazy absolute coordinates
  * for drawing graphics will be hidden away.
  */
-class Canvas
+class Canvas implements RegionInterface
 {
     use ConfigTrait;
     use TileSizeTrait;
