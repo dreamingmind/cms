@@ -30,7 +30,7 @@ class Room
      * @var Region
      */
     private $region;
-    private $rectangle;
+//    private $rectangle;
 
     public function __construct($region)
     {

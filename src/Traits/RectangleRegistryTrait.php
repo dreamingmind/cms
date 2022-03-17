@@ -9,6 +9,11 @@ trait RectangleRegistryTrait
 {
 
     /**
+     * @var Rectangle
+     */
+    protected $rectangle;
+
+    /**
      * @param string|null $key
      * @return array|Rectangle
      */
