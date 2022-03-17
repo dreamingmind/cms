@@ -3,12 +3,13 @@
 namespace App\GDPrimitives;
 
 use App\Constants\Con;
+use App\Interfaces\GridInterface;
 use App\Lib\Region;
 use App\Lib\TilePool;
 use App\Registries\ColorRegistry;
 use App\Traits\ConfigTrait;
 
-class Grid
+class Grid implements GridInterface
 {
 
     use ConfigTrait;
