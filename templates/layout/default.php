@@ -14,7 +14,16 @@
  * @var \App\View\AppView $this
  */
 
+use App\Controller\AppController;
+use App\Lib\Introspection;
+
 $cakeDescription = 'CakePHP: the rapid development php framework';
+
+$a = get_class_methods(AppController::class);
+$b = get_class_methods(\App\Controller\DungeonsController::class);
+$links = array_diff($b, $a);
+sort($links);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,8 +50,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+            <?php
+            collection($links)
+                ->map(function ($link){
+                    echo $this->Html->link($link, ['controller' => 'dungeons', 'action' => $link]);
+                })
+                ->toArray();
+//            osd($links);
+            ?>
+<!--            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>-->
+<!--            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>-->
         </div>
     </nav>
     <main class="main">

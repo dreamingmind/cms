@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Lib\Introspection;
 use App\Strategies\StrategyOne;
 use App\Strategies\StrategyTwo;
 
@@ -10,7 +11,7 @@ class DungeonsController extends AppController
 
     public function view()
     {
-        $this->viewBuilder()->setLayout('ajax');
+
     }
 
     public function dun()
