@@ -3,7 +3,7 @@
 namespace App\Test\TestCase\Traits;
 
 use App\GDPrimitives\Color;
-use App\Lib\ColorRegistry;
+use App\Registries\ColorRegistry;
 use App\Traits\ColorRegistryTrait;
 use Cake\TestSuite\TestCase;
 

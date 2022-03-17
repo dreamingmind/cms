@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use App\Exceptions\MissingClassPropertyException;
 use App\GDPrimitives\Color;
-use App\Lib\ColorRegistry;
+use App\Registries\ColorRegistry;
 use Cake\Event\Event;
 use Cake\Event\EventManager;
 

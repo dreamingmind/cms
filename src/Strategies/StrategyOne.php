@@ -7,10 +7,9 @@ use App\GDPrimitives\Color;
 use App\GDPrimitives\Grid;
 use App\GDPrimitives\Rectangle;
 use App\GDPrimitives\Tile;
-use App\Lib\ColorRegistry;
-use App\Traits\ColorRegistryTrait;
 use App\Lib\Region;
 use App\Lib\Room;
+use App\Traits\ColorRegistryTrait;
 
 class StrategyOne
 {

@@ -5,6 +5,7 @@ namespace App\Lib;
 use App\Constants\Con;
 use App\GDPrimitives\Color;
 use App\Interfaces\RegionInterface;
+use App\Registries\ColorRegistry;
 use App\Traits\ConfigTrait;
 use App\Traits\TileSizeTrait;
 

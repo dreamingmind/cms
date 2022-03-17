@@ -2,9 +2,8 @@
 
 namespace App\GDPrimitives;
 
-use App\Lib\ColorRegistry;
-use App\Traits\ColorRegistryTrait;
 use App\Interfaces\PointPairInterface;
+use App\Traits\ColorRegistryTrait;
 
 class Rectangle
 {

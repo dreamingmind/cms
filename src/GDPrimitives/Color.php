@@ -3,7 +3,7 @@
 namespace App\GDPrimitives;
 
 use App\Exceptions\BadConstructorValueException;
-use App\Lib\ColorRegistry;
+use App\Registries\ColorRegistry;
 
 class Color
 {

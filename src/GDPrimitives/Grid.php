@@ -3,10 +3,10 @@
 namespace App\GDPrimitives;
 
 use App\Constants\Con;
-use App\Lib\ColorRegistry;
-use App\Traits\ConfigTrait;
 use App\Lib\Region;
 use App\Lib\TilePool;
+use App\Registries\ColorRegistry;
+use App\Traits\ConfigTrait;
 
 class Grid
 {
