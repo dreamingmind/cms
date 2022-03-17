@@ -45,12 +45,10 @@ class Region implements RegionInterface, PointPairInterface
         else {
             $this->canvas = new Canvas($config);
         }
-        if (($config['grid'] ?? null) instanceof Grid) {
-            $this->grid = $config['grid'];
-        }
-        else {
-            $this->grid = new Grid($this);
-        }
+
+        $grid = $config['grid'] ?? Grid::class;
+        $this->grid = new $grid($this);
+
         $this->pts = new PointPair(
             new Point($this->origin(Con::X), $this->origin(Con::Y)),
             new Point($this->width(Con::PIXEL), $this->height(Con::PIXEL))
