@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\GDPrimitives\HexGridDistorted;
+use App\GDPrimitives\HexGrid;
 use App\Strategies\StrategyOne;
 use App\Strategies\StrategyTwo;
 use App\Strategies\ReplHex;
@@ -29,6 +29,7 @@ class DungeonsController extends AppController
     public function dun2()
     {
         $Canvas = new StrategyTwo([
+//            'grid' => HexGrid::class,
             'tiles_wide' => 50,
             'tiles_high' => 25,
             'tile_size' => 70,
@@ -38,11 +39,11 @@ class DungeonsController extends AppController
 
     public function hex()
     {
-        $canvas = new ReplHex([
-            'grid' => HexGridDistorted::class,
-            'tiles_wide' => 30,
-            'tiles_high' => 15,
-            'tile_size' => 80
+        $canvas = new StrategyTwo([
+            'grid' => HexGrid::class,
+            'tiles_wide' => 100,
+            'tiles_high' => 50,
+            'tile_size' => 70
         ]);
         $canvas->output();
         $this->render('dun');
