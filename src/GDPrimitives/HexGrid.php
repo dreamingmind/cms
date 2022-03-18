@@ -4,10 +4,11 @@ namespace App\GDPrimitives;
 
 use App\Constants\Con;
 use App\Lib\Region;
+use App\Lib\SubRegion;
 use App\Registries\ColorRegistry;
 use App\Traits\ConfigTrait;
 
-class HexGridDistorted extends Grid
+class HexGrid extends Grid
 {
 
     /**
@@ -35,7 +36,10 @@ class HexGridDistorted extends Grid
 
     private function drawHex($x, $y)
     {
-        $shift = $x % 2 ? .5 * $this->region()->tileSize() : 0;
+        //calculate column number from the pixel value and tile size
+        $xIndex = $this->getX($x) / $this->region()->tileSize();
+        //odd columns shift half a cell down
+        $shift = $xIndex % 2 ? .5 * $this->region()->tileSize() : 0;
 
         $origin = new PointPair(
             new Point(
@@ -57,7 +61,6 @@ class HexGridDistorted extends Grid
             $origin->getPoint(87.5, 0),
             $origin->getPoint(12.5, 0),
         ];
-
 
         $values = collection($vertices)
             ->reduce(function($accum,$point){
