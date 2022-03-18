@@ -4,14 +4,16 @@ namespace App\Lib;
 
 use App\Constants\Con;
 use App\GDPrimitives\Rectangle;
+use App\Traits\ColorRegistryTrait;
 use App\Traits\RectangleRegistryTrait;
 
 class Room
 {
 
     use RectangleRegistryTrait;
+    use ColorRegistryTrait;
 
-    private $max = 5;
+    private $max = 10;
     private $min = 3;
     private $tiles = [];
     private $bufferTiles = [];
@@ -99,7 +101,13 @@ class Room
             list($x, $y) = explode('-', $key);
             $this->tiles[$key] = $pool->tile($x, $y);
             $pool->insertRoomTile($key);
-            $this->rectangle->fill($canvas, $this->tiles[$key]);
+            imagefill(
+                $canvas,
+                $this->tiles[$key]->points()->getPoint(25,25)->x(),
+                $this->tiles[$key]->points()->getPoint(25,25)->y(),
+                $this->getColor('fill')->allocate($canvas)
+            );
+//            $this->rectangle->fill($canvas, $this->tiles[$key]);
         }
         foreach ($this->bufferTiles as $key => $value) {
             list($x, $y) = explode('-', $key);
