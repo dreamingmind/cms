@@ -4,7 +4,7 @@ namespace App\Strategies;
 
 use App\Constants\Con;
 use App\GDPrimitives\Color;
-use App\GDPrimitives\HexGridDistorted;
+use App\GDPrimitives\HexGrid;
 use App\GDPrimitives\Rectangle;
 use App\Lib\Region;
 
@@ -46,11 +46,12 @@ class ReplHex
             'ground_color' => (new Color())->grey(100),
             'tiles_wide' => $region->width(Con::TILE) / 2,
             'tiles_high' => $region->height(Con::TILE) / 2,
-            'grid' => HexGridDistorted::class,
+            'grid' => HexGrid::class,
         ];
 
         $subRegion = $region->newSubRegion($config)
-            ->setColor('fill', 'ground')
+//            ->setColor('fill', 'ground')
+            ->setColor('fill', 'light', ['grey' => 15])
             ->setColor('stroke', 'black', ['grey' => 100]);
         $subRegion->grid()->stroke = 1;
 

@@ -44,8 +44,8 @@ class StrategyTwo
         $existingBufferTiles = $tilePool->bufferTiles();
 
         do {
-            $room = new Room($region);
-            $room->_getRectangle('room')
+            $room = (new Room($region))
+//            $room->_getRectangle('room')
                 ->setColor('fill', 'rand', $this->randomColor());
             $inUse = collection($room->tiles())
                 ->filter(function($tile, $key) use ($existingRoomTiles, $existingBufferTiles) {
@@ -57,6 +57,5 @@ class StrategyTwo
 
         return $room;
     }
-
 
 }
