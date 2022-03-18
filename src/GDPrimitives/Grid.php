@@ -35,6 +35,7 @@ class Grid implements GridInterface
         $this->region = $region;
         $this->config = array_merge($this->defaultConfig, $config);
         $this->stroke_color = ColorRegistry::get('grid');
+        $this->stroke = $this->getConfig('stroke', 1);
     }
 
     /**
@@ -62,7 +63,7 @@ class Grid implements GridInterface
      */
     public function draw($canvas): void
     {
-        imagesetthickness($canvas,1);
+        imagesetthickness($canvas,$this->stroke);
         foreach (range(0, $this->region->width(Con::TILE)) as $i => $x) {
             $this->xLine($i)->draw($canvas);
         }

@@ -15,7 +15,7 @@ class HexGridDistorted extends Grid
      */
     public function draw($canvas): void
     {
-        imagesetthickness($canvas,1);
+        imagesetthickness($canvas,$this->stroke);
 
         collection(range(1, $this->region->width(Con::TILE)))
             ->map(function($x) {
